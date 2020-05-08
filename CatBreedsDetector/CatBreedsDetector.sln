@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Classific
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{5D0E71F6-A597-43A3-9396-640BB16552EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Web", "CatBreedsDetector.Web\CatBreedsDetector.Web.csproj", "{9909395E-8D9B-4C7F-9393-FD9A754EFF9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Web", "CatBreedsDetector.Web\CatBreedsDetector.Web.csproj", "{9909395E-8D9B-4C7F-9393-FD9A754EFF9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
