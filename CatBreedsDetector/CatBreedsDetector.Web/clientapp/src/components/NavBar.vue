@@ -1,19 +1,27 @@
 ﻿<template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Cat Breeds Detector</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <router-link tag="a" class="nav-link" id="v-pills-home-tab" to="/" v-bind:class="{ active: active === 'home' }" v-on:click="active = home">Home</router-link>
+                    <router-link tag="a" class="nav-link" id="v-pills-about-tab" to="/about">About</router-link>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <router-view></router-view>
+                </div>
+            </div>
         </div>
-    </nav>
+    </div>
 </template>
 
 <script>
-
+    export default {
+        data: function () {
+            return {
+                active: null
+            }
+        }
+    }
 </script>
