@@ -1,7 +1,9 @@
 <template>
-  <div id="app">
-      <NavBar></NavBar>
-      <h1 class="mt-3">Welcome, this is Cat Breeds Detector!</h1>
+  <div id="app" class="container">
+      <img class="img-thumbnail rounded-circle" src="../public/cat-paw-logo.png"/>
+      <h1 class="display-3 mt-3">Cat Breeds Detector</h1>
+      <hr />
+      <NavBar message="Hello there"></NavBar>
   </div>
 </template>
 
@@ -17,11 +19,17 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: 'Indie-Flower';
+  src: url('../public/fonts/IndieFlower-Regular.ttf');
+}
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    font-family: Indie-Flower;
+    font-size: 1.4em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
 }
 </style>
