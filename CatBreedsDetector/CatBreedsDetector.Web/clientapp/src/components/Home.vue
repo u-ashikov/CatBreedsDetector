@@ -1,6 +1,5 @@
 ﻿<template>
     <div>
-        <h1>Hello, this is the home page</h1>
         <breed-detect-form></breed-detect-form>
     </div>
 </template>
