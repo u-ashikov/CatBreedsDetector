@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using VueCliMiddleware;
-
 namespace CatBreedsDetector.Web
 {
+    using Classification;
+    using Classification.Interfaces;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using VueCliMiddleware;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -30,6 +26,8 @@ namespace CatBreedsDetector.Web
             {
                 configuration.RootPath = "ClientApp";
             });
+
+            services.AddSingleton<ICatBreedClassifier, CatBreedClassifier>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,16 +49,12 @@ namespace CatBreedsDetector.Web
 
             app.UseSpa(spa =>
             {
-                if (env.IsDevelopment())
-                    spa.Options.SourcePath = "ClientApp";
-                else
-                    spa.Options.SourcePath = "dist";
+                spa.Options.SourcePath = env.IsDevelopment() ? "ClientApp" : "dist";
 
                 if (env.IsDevelopment())
                 {
                     spa.UseVueCli(npmScript: "serve");
                 }
-
             });
         }
     }
