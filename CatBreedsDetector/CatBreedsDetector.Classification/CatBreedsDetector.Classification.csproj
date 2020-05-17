@@ -17,4 +17,26 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="assets\images\Abyssinian.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\inception\imagenet.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\inception\imagenet.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\inception\imagenet_comp_graph_label_strings.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\inception\tensorflow_inception_graph.pb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="PredictedImages\" />
+  </ItemGroup>
+
 </Project>

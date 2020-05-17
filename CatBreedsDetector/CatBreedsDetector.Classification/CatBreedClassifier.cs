@@ -17,11 +17,18 @@
             this.mlContext = new MLContext();
         }
 
-        public void ClassifySingleImage()
+        public string ClassifySingleImage(string path)
         {
+            if (string.IsNullOrEmpty(path) || !File.Exists(path))
+            {
+                throw new ArgumentException("File is missing or invalid!");
+            }
+
+            // TODO: Train and save the model and use it.
+
             var imageData = new ImageData()
             {
-                ImagePath = Constants._predictSingleImage
+                ImagePath = path
             };
 
             var model = this.GenerateModel();
@@ -29,7 +36,7 @@
             var predictor = this.mlContext.Model.CreatePredictionEngine<ImageData, ImagePrediction>(model);
             var prediction = predictor.Predict(imageData);
 
-            Console.WriteLine($"Image: {Path.GetFileName(imageData.ImagePath)} predicted as: {prediction.PredictedLabelValue} with score: {prediction.Score.Max()} ");
+            return prediction.PredictedLabelValue;
         }
 
         private ITransformer GenerateModel()

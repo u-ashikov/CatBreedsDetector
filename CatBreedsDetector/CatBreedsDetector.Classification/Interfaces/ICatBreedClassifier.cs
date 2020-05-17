@@ -2,6 +2,6 @@
 {
     public interface ICatBreedClassifier
     {
-        void ClassifySingleImage();
+        string ClassifySingleImage(string path);
     }
 }
