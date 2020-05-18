@@ -1,21 +1,40 @@
 <template>
-    <form method="post" enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
-        <div class="dropbox">
-            <label for="file" class="h6">Upload Cat Image</label>
-            <input type="file" accept="img/*" v-bind:name="uploadedFieldName" v-bind:disabled="isSaving" class="input-file" />
-            <p v-if="isInitial">
-                Drag your file here to begin<br> or click to browse
+    <div>
+        <form method="post" enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
+            <div class="dropbox">
+                <label for="file" class="h6">Upload Cat Image</label>
+                <input type="file" accept="image/*" v-bind:name="catImage" v-bind:disabled="isSaving" v-on:change="handleChange($event.target.name, $event.target.files)" class="input-file" />
+                <p v-if="isInitial">
+                    Drag your file here to begin<br> or click to browse
+                </p>
+                <p v-if="isSaving">
+                    Uploading the file...
+                    <img v-bind:src="this.url" class="img-responsive img-thumbnail" v-bind:alt="uploadedImage.originalName">
+                </p>
+            </div>
+        </form>
+        <div v-if="isSuccess">
+            <h2>File uploaded successfully.</h2>
+            <p>
+                <a href="javascript:void(0)" @click="reset()">Upload again</a>
             </p>
-            <p v-if="isSaving">
-                Uploading the file...
-            </p>
+            <h1>Your cats is: {{ predictedBreed }}</h1>
+            <img v-bind:src="this.url" class="img-responsive img-thumbnail">
         </div>
-
-        <input type="submit" class="btn btn-success" value="Check Breed" v-on:submit="submitForm()"/>
-    </form>
+        <!--FAILED-->
+        <div v-if="isFailed">
+            <h2>Uploaded failed.</h2>
+            <p>
+                <a href="javascript:void(0)" @click="reset()">Try again</a>
+            </p>
+            <pre>{{ uploadError }}</pre>
+        </div>
+    </div>
 </template>
 
 <script>
+    import fileService from '../service/file-service.js';
+
     const STATUS_INITIAL = 0, STATUS_SAVING = 1, STATUS_SUCCESS = 2, STATUS_FAILED = 3;
 
     export default {
@@ -24,7 +43,9 @@
                 uploadedImage: null,
                 uploadError: null,
                 currentStatus: null,
-                uploadedFieldName: 'cat-image'
+                catImage: 'cat-image',
+                url: null,
+                predictedBreed: null
             }
         },
         computed: {
@@ -43,14 +64,40 @@
         },
         methods: {
             upload: function (formData) {
-                //evt.preventDefault();
-                // eslint-disable-next-line no-console
-                console.log(formData);
+                this.currentStatus = STATUS_SAVING;
+
+                fileService.upload(formData)
+                    .then(x => {
+                        // eslint-disable-next-line no-console
+                        console.log(x);
+                        this.currentStatus = STATUS_SUCCESS;
+                        this.predictedBreed = x.data;
+                    })
+                    .catch(err => {
+                        this.uploadError = err.response;
+                        this.currentStatus = STATUS_FAILED;
+                    });
             },
             reset: function () {
                 this.uploadedImage = null;
                 this.currentStatus = STATUS_INITIAL;
                 this.uploadError = null;
+                this.url = null;
+            },
+            handleChange: function (fieldName, files) {
+                const formData = new FormData();
+
+                if (!files.length) {
+                    return;
+                }
+
+                this.uploadedImage = files[0];
+
+                formData.append('catImage', files[0]);
+
+                this.url = URL.createObjectURL(files[0]);
+
+                this.upload(formData);
             }
         },
         mounted: function () {
