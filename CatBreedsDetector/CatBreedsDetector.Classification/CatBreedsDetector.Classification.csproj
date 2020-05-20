@@ -39,4 +39,8 @@
     <Folder Include="PredictedImages\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CatBreedsDetector.Common\CatBreedsDetector.Common.csproj" />
+  </ItemGroup>
+
 </Project>

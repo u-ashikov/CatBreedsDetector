@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Web", "CatBreedsDetector.Web\CatBreedsDetector.Web.csproj", "{9909395E-8D9B-4C7F-9393-FD9A754EFF9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Common", "CatBreedsDetector.Common\CatBreedsDetector.Common.csproj", "{79A4E903-04F3-4CEF-AF12-56427B74AC9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9909395E-8D9B-4C7F-9393-FD9A754EFF9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9909395E-8D9B-4C7F-9393-FD9A754EFF9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9909395E-8D9B-4C7F-9393-FD9A754EFF9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79A4E903-04F3-4CEF-AF12-56427B74AC9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79A4E903-04F3-4CEF-AF12-56427B74AC9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79A4E903-04F3-4CEF-AF12-56427B74AC9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79A4E903-04F3-4CEF-AF12-56427B74AC9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
