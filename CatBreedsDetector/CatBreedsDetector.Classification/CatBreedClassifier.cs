@@ -6,7 +6,7 @@
     using Models;
     using System;
     using System.IO;
-    using System.Linq;
+    using CommonConstants = CatBreedsDetector.Common;
 
     public class CatBreedClassifier : ICatBreedClassifier
     {
@@ -21,10 +21,8 @@
         {
             if (string.IsNullOrEmpty(path) || !File.Exists(path))
             {
-                throw new ArgumentException("File is missing or invalid!");
+                throw new ArgumentException(CommonConstants.Constants.Message.MissingOrInvalidFile);
             }
-
-            // TODO: Train and save the model and use it.
 
             var imageData = new ImageData()
             {
@@ -36,19 +34,28 @@
             var predictor = this.mlContext.Model.CreatePredictionEngine<ImageData, ImagePrediction>(model);
             var prediction = predictor.Predict(imageData);
 
+            predictor.Dispose();
+
             return prediction.PredictedLabelValue;
         }
 
         private ITransformer GenerateModel()
         {
+            if (File.Exists(Constants.SavedModelFileName))
+            {
+                var trainedModel = mlContext.Model.Load(Constants.SavedModelFileName, out var modelSchema);
+
+                return trainedModel;
+            }
+
             var pipeline = this.mlContext.Transforms.LoadImages(outputColumnName: "input",
-                    imageFolder: Constants._imagesFolder, inputColumnName: nameof(ImageData.ImagePath))
+                    imageFolder: Constants.ImagesFolder, inputColumnName: nameof(ImageData.ImagePath))
                 .Append(mlContext.Transforms.ResizeImages(outputColumnName: "input",
                     imageWidth: InceptionSettings.ImageWidth, imageHeight: InceptionSettings.ImageHeight,
                     inputColumnName: "input"))
                 .Append(mlContext.Transforms.ExtractPixels(outputColumnName: "input",
                     interleavePixelColors: InceptionSettings.ChannelsLast, offsetImage: InceptionSettings.Mean))
-                .Append(mlContext.Model.LoadTensorFlowModel(Constants._inceptionTensorFlowModel)
+                .Append(mlContext.Model.LoadTensorFlowModel(Constants.InceptionTensorFlowModel)
                     .ScoreTensorFlowModel(outputColumnNames: new[] {"softmax2_pre_activation"},
                         inputColumnNames: new[] {"input"}, addBatchDimensionInput: true))
                 .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "LabelKey",
@@ -58,9 +65,11 @@
                 .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabelValue", "PredictedLabel"))
                 .AppendCacheCheckpoint(this.mlContext);
 
-            var trainingData = this.mlContext.Data.LoadFromTextFile<ImageData>(path: Constants._trainTagsTsv);
+            var trainingData = this.mlContext.Data.LoadFromTextFile<ImageData>(path: Constants.TrainTagsTsv);
 
             var model = pipeline.Fit(trainingData);
+
+            mlContext.Model.Save(model, trainingData.Schema, Constants.SavedModelFileName);
 
             return model;
         }
