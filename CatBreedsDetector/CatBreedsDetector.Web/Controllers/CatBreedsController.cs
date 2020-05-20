@@ -1,7 +1,7 @@
 ﻿namespace CatBreedsDetector.Web.Controllers
 {
     using Classification.Interfaces;
-    using Microsoft.AspNetCore.Hosting;
+    using Common;
     using Microsoft.AspNetCore.Mvc;
     using Models;
     using System.IO;
@@ -12,13 +12,10 @@
     [Route("api/[controller]")]
     public class CatBreedsController : ControllerBase
     {
-        private readonly IWebHostEnvironment hostingEnvironment;
-
         private readonly ICatBreedClassifier catBreedClassifier;
 
-        public CatBreedsController(IWebHostEnvironment hostingEnvironment, ICatBreedClassifier catBreedClassifier)
+        public CatBreedsController(ICatBreedClassifier catBreedClassifier)
         {
-            this.hostingEnvironment = hostingEnvironment;
             this.catBreedClassifier = catBreedClassifier;
         }
 
@@ -28,13 +25,13 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.BadRequest("You must provide a file!");
+                return this.BadRequest(Constants.Message.ProvideFileImage);
             }
 
             var buildDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var path = buildDir + $@"\PredictedImages\{model.CatImage.FileName}";
+            var path = buildDir + $@"\{Constants.FilePath.PredictedImages}\{model.CatImage.FileName}";
 
-            using (var stream = new FileStream(path, FileMode.Create))
+            await using (var stream = new FileStream(path, FileMode.Create))
             {
                 await model.CatImage.CopyToAsync(stream);
             }
