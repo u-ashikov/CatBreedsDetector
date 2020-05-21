@@ -2,7 +2,6 @@
     <div>
         <form method="post" enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
             <div class="dropbox">
-                <label for="file" class="h6">Upload Cat Image</label>
                 <input type="file" accept="image/*" v-bind:name="catImage" v-bind:disabled="isSaving" v-on:change="handleChange($event.target.name, $event.target.files)" class="input-file" />
                 <p v-if="isInitial">
                     Drag your file here to begin<br> or click to browse
@@ -68,8 +67,6 @@
 
                 fileService.upload(formData)
                     .then(x => {
-                        // eslint-disable-next-line no-console
-                        console.log(x);
                         this.currentStatus = STATUS_SUCCESS;
                         this.predictedBreed = x.data;
                     })
@@ -116,6 +113,10 @@
         min-height: 200px; /* minimum height */
         position: relative;
         cursor: pointer;
+    }
+
+    input[type=file] {
+        display: block;
     }
 
     .input-file {

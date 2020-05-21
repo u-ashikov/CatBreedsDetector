@@ -1,5 +1,5 @@
 ﻿<template>
-    <div>
+    <div class="container">
         <breed-detect-form></breed-detect-form>
     </div>
 </template>
