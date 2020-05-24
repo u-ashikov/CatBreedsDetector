@@ -2,6 +2,7 @@
 {
     using Classification.Interfaces;
     using Common;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Models;
     using System.IO;
@@ -29,16 +30,37 @@
             }
 
             var buildDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var path = buildDir + $@"\{Constants.FilePath.PredictedImages}\{model.CatImage.FileName}";
+            var predictedImagesDirectoryPath = buildDir + $@"\{Constants.FilePath.PredictedImages}";
+            var imagePath = predictedImagesDirectoryPath + $@"\{model.CatImage.FileName}";
 
-            await using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await model.CatImage.CopyToAsync(stream);
-            }
+            this.DeleteAlreadyPredictedImages(predictedImagesDirectoryPath);
 
-            var prediction = this.catBreedClassifier.ClassifySingleImage(path);
+            await this.SaveImageToFileAsync(imagePath, model.CatImage);
+
+            var prediction = this.catBreedClassifier.ClassifySingleImage(imagePath);
 
             return this.Ok(prediction);
+        }
+
+        private void DeleteAlreadyPredictedImages(string directoryPath)
+        {
+            if (Directory.Exists(directoryPath))
+            {
+                var predictedDirectory = new DirectoryInfo(directoryPath);
+
+                foreach (var file in predictedDirectory.GetFiles())
+                {
+                    file.Delete();
+                }
+            }
+        }
+
+        private async Task SaveImageToFileAsync(string imagePath, IFormFile imageFile)
+        {
+            using (var stream = System.IO.File.Create(imagePath))
+            {
+                await imageFile.CopyToAsync(stream);
+            }
         }
     }
 }

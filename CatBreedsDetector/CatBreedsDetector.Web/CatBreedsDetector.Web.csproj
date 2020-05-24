@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CatBreedsDetector.Classification\CatBreedsDetector.Classification.csproj" />
+    <ProjectReference Include="..\CatBreedsDetector.Common\CatBreedsDetector.Common.csproj" />
   </ItemGroup>
 
 
