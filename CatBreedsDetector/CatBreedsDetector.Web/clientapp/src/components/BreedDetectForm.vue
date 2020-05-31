@@ -26,7 +26,6 @@
             <p>
                 <a href="javascript:void(0)" @click="reset()">Try again</a>
             </p>
-            <pre>{{ uploadError }}</pre>
         </div>
     </div>
 </template>
@@ -40,7 +39,6 @@
         data: function () {
             return {
                 uploadedImage: null,
-                uploadError: null,
                 currentStatus: null,
                 catImage: 'cat-image',
                 url: null,
@@ -70,15 +68,13 @@
                         this.currentStatus = STATUS_SUCCESS;
                         this.predictedBreed = x.data;
                     })
-                    .catch(err => {
-                        this.uploadError = err.response;
+                    .catch(() => {
                         this.currentStatus = STATUS_FAILED;
                     });
             },
             reset: function () {
                 this.uploadedImage = null;
                 this.currentStatus = STATUS_INITIAL;
-                this.uploadError = null;
                 this.url = null;
             },
             handleChange: function (fieldName, files) {
