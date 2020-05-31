@@ -40,7 +40,6 @@ namespace CatBreedsDetector.Web
 
             app.UseRouting();
             app.UseSpaStaticFiles();
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
