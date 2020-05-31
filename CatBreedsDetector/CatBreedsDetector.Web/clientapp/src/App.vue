@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-      <img class="img-thumbnail rounded-circle" src="../public/cat-paw-logo.png"/>
+      <img class="img-thumbnail rounded-circle mt-3" src="../public/cat-paw-logo.png"/>
       <h1 class="display-3 mt-3">Cat Breeds Detector</h1>
       <hr />
       <NavBar></NavBar>

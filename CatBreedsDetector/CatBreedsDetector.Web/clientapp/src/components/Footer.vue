@@ -9,7 +9,6 @@
     #footer {
         padding-top: 10px;
         padding-bottom: 10px;
-        position: fixed;
         bottom: 0;
         width: 100%;
     }
