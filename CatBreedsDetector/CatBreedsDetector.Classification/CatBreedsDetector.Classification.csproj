@@ -21,6 +21,9 @@
     <None Update="assets\images\Abyssinian.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="assets\images\tags.tsv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="assets\inception\imagenet.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
