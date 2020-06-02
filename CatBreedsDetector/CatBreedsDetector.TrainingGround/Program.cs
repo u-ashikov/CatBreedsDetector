@@ -1,20 +1,23 @@
-﻿using System;
-using System.IO;
-
-namespace CatBreedsDetector.TrainingGround
+﻿namespace CatBreedsDetector.TrainingGround
 {
+    using System.IO;
+
     public class Program
     {
         public static void Main()
         {
-            if (!Directory.Exists("cats"))
+            const string CatsImagesDirectoryName = "cats";
+            const string TrainingTagsFile = "tags.tsv";
+            const string TrainingTagsSeparatorChar = "\t";
+
+            if (!Directory.Exists(CatsImagesDirectoryName))
             {
                 return;
             }
 
-            var directories = Directory.GetDirectories("cats");
+            var directories = Directory.GetDirectories(CatsImagesDirectoryName);
 
-            using (var fileWriter = new StreamWriter("tags.tsv", true))
+            using (var fileWriter = new StreamWriter(TrainingTagsFile, true))
             {
                 foreach (var directory in directories)
                 {
@@ -25,7 +28,7 @@ namespace CatBreedsDetector.TrainingGround
                     {
                         var fileInfo = new FileInfo(file);
                         
-                        fileWriter.WriteLine(string.Concat(fileInfo.Name, "\t", directoryInfo.Name));
+                        fileWriter.WriteLine(string.Concat(fileInfo.Name, TrainingTagsSeparatorChar, directoryInfo.Name));
                     }
                 }
             }
