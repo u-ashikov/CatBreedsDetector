@@ -24,11 +24,6 @@
         [Route("DetectAsync")]
         public async Task<IActionResult> DetectAsync([FromForm]CatBreedDetectInputModel model)
         {
-            if (!this.ModelState.IsValid)
-            {
-                return this.BadRequest(Constants.Message.ProvideFileImage);
-            }
-
             var buildDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var predictedImagesDirectoryPath = buildDir + $@"\{Constants.FilePath.PredictedImages}";
             var imagePath = predictedImagesDirectoryPath + $@"\{model.CatImage.FileName}";
