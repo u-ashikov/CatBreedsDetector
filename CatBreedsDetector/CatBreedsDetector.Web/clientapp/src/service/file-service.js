@@ -1,7 +1,7 @@
 ﻿import axios from 'axios';
 
 var axiosInstance = axios.create({
-    baseURL: 'http://localhost:50598/api'
+    baseURL: 'http://localhost:59999/api'
 });
 
 function upload(formData) {

@@ -6,6 +6,7 @@ import { router } from './routing/router'
 import 'jquery/src/jquery.js'
 import 'popper.js/dist/popper.min.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);

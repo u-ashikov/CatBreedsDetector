@@ -27,6 +27,11 @@
                 <a href="javascript:void(0)" @click="reset()">Try again</a>
             </p>
         </div>
+        <ul style="list-style:none;" v-show="errors && errors.length > 0">
+            <li v-for="error in errors" v-bind:key="error" class="text-danger">
+                <i class="fas fa-times-circle text-danger"></i> {{error}}
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -42,7 +47,9 @@
                 currentStatus: null,
                 catImage: 'cat-image',
                 url: null,
-                predictedBreed: null
+                predictedBreed: null,
+                errors: [],
+                error: null
             }
         },
         computed: {
@@ -67,8 +74,21 @@
                     .then(x => {
                         this.currentStatus = STATUS_SUCCESS;
                         this.predictedBreed = x.data;
+                        this.errors = [];
                     })
-                    .catch(() => {
+                    .catch((error) => {
+                        if (error && error.response.status == 400) {
+                            var errorsArray = error.response.data.map(function (e) {
+                                return e.errors;
+                            })[0];
+
+                            var allErrorMessages = errorsArray.map(function (e) {
+                                return e.errorMessage;
+                            });
+
+                            this.errors = allErrorMessages;
+                        }
+
                         this.currentStatus = STATUS_FAILED;
                     });
             },
@@ -76,6 +96,7 @@
                 this.uploadedImage = null;
                 this.currentStatus = STATUS_INITIAL;
                 this.url = null;
+                this.errors = [];
             },
             handleChange: function (fieldName, files) {
                 const formData = new FormData();
