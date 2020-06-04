@@ -4,18 +4,17 @@
     using Microsoft.AspNetCore.Http;
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-    public class FileExtensionsAttribute : ValidationAttribute
+    public class CustomFileExtensionAttribute : ValidationAttribute
     {
         private string extensions;
 
         private string extensionsNormalized => this.extensions.Replace(Constants.StringSeparator.Space, string.Empty, StringComparison.Ordinal).ToUpperInvariant();
 
-        public FileExtensionsAttribute()
+        public CustomFileExtensionAttribute()
             : base(() => Constants.Message.InvalidUploadedFile) { }
 
         public string Extensions
@@ -24,18 +23,26 @@
             set => this.extensions = value;
         }
 
-        public override bool IsValid(object value)
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (value == null)
             {
-                return true;
+                return ValidationResult.Success;
             }
 
-            return this.extensionsNormalized.Split(Constants.StringSeparator.Comma, StringSplitOptions.RemoveEmptyEntries)
-                .Contains(Path.GetExtension(((IFormFile)value).FileName).ToUpperInvariant());
-        }
+            var fileExtension = Path.GetExtension(((IFormFile)value).FileName.ToUpperInvariant());
 
-        public override string FormatErrorMessage(string name) 
-            => string.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, this.Extensions);
+            var isValid = this.extensionsNormalized
+                .Split(Constants.StringSeparator.Comma, StringSplitOptions.RemoveEmptyEntries)
+                .Select(e => Constants.StringSeparator.Dot + e)
+                .Contains(fileExtension);
+
+            if (!isValid)
+            {
+                return new ValidationResult(Constants.Message.InvalidUploadedFileExtension);
+            }
+
+            return ValidationResult.Success;
+        }
     }
 }

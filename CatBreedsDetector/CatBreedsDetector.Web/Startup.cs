@@ -25,13 +25,14 @@ namespace CatBreedsDetector.Web
             services
                 .AddControllers()
                 .ConfigureApiBehaviorOptions(options =>
-                {
-                    options.InvalidModelStateResponseFactory = actionContext =>
                     {
-                        var errors = actionContext.ModelState.Values;
-                        return new BadRequestObjectResult(errors);
-                    };
-                });
+                        options.SuppressInferBindingSourcesForParameters = true;
+                        options.InvalidModelStateResponseFactory = (actionContext =>
+                        {
+                            var errors = actionContext.ModelState.Values;
+                            return new BadRequestObjectResult(errors);
+                        });
+                    });
 
             services.AddSpaStaticFiles(configuration =>
             {
