@@ -34,7 +34,9 @@
 
             var prediction = this.catBreedClassifier.ClassifySingleImage(imagePath);
 
-            return this.Ok(prediction);
+            var predictionResult = new CatBreedPredictionResultModel(prediction.PredictedLabelValue, prediction.PredictionProbability);
+
+            return this.Ok(predictionResult);
         }
 
         private void DeleteAlreadyPredictedImages(string directoryPath)

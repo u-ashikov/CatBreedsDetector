@@ -6,6 +6,7 @@
     using Models;
     using System;
     using System.IO;
+    using System.Linq;
     using CommonConstants = CatBreedsDetector.Common;
 
     public class CatBreedClassifier : ICatBreedClassifier
@@ -17,7 +18,7 @@
             this.mlContext = new MLContext();
         }
 
-        public string ClassifySingleImage(string path)
+        public ImagePrediction ClassifySingleImage(string path)
         {
             if (string.IsNullOrEmpty(path) || !File.Exists(path))
             {
@@ -32,11 +33,8 @@
             var model = this.GenerateModel();
 
             var predictor = this.mlContext.Model.CreatePredictionEngine<ImageData, ImagePrediction>(model);
-            var prediction = predictor.Predict(imageData);
 
-            predictor.Dispose();
-
-            return prediction.PredictedLabelValue;
+            return predictor.Predict(imageData);
         }
 
         private ITransformer GenerateModel()

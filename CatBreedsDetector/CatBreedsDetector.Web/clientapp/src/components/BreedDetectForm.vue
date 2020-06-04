@@ -18,6 +18,7 @@
                 <a href="javascript:void(0)" @click="reset()">Upload again</a>
             </p>
             <h1>Your cats is: {{ predictedBreed }}</h1>
+            <h2>(Probability: {{ predictionProbability | percentage }})</h2>
             <img v-bind:src="this.url" class="img-responsive img-thumbnail">
         </div>
         <!--FAILED-->
@@ -48,6 +49,7 @@
                 catImage: 'cat-image',
                 url: null,
                 predictedBreed: null,
+                predictionProbability: null,
                 errors: [],
                 error: null
             }
@@ -73,7 +75,8 @@
                 fileService.upload(formData)
                     .then(x => {
                         this.currentStatus = STATUS_SUCCESS;
-                        this.predictedBreed = x.data;
+                        this.predictedBreed = x.data.breed;
+                        this.predictionProbability = x.data.predictionProbability;
                         this.errors = [];
                     })
                     .catch((error) => {
@@ -112,6 +115,15 @@
                 this.url = URL.createObjectURL(files[0]);
 
                 this.upload(formData);
+            }
+        },
+        filters: {
+            percentage: function (value) {
+                if (!value) {
+                    return '';
+                }
+
+                return ((parseFloat(value).toFixed(2)) * 100) + '%';
             }
         },
         mounted: function () {

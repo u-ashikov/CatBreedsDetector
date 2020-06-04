@@ -1,7 +1,9 @@
 ﻿namespace CatBreedsDetector.Classification.Interfaces
 {
+    using Models;
+
     public interface ICatBreedClassifier
     {
-        string ClassifySingleImage(string path);
+        ImagePrediction ClassifySingleImage(string path);
     }
 }
