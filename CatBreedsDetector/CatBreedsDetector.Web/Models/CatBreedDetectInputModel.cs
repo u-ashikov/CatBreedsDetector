@@ -9,6 +9,7 @@
     {
         [Required]
         [CustomFileExtension(Extensions = Constants.FileExtension.DefaultImageFileExtensions, ErrorMessage = Constants.Message.InvalidUploadedFileExtension)]
+        [FileSize(Constants.FileSize.MaxAllowedFileSizeInMb)]
         public IFormFile CatImage { get; set; }
     }
 }
