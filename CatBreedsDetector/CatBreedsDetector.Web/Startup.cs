@@ -2,6 +2,8 @@ namespace CatBreedsDetector.Web
 {
     using Classification;
     using Classification.Interfaces;
+    using Infrastructure.Helpers.Contracts;
+    using Infrastructure.Helpers.Implementations;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -40,6 +42,7 @@ namespace CatBreedsDetector.Web
             });
 
             services.AddSingleton<ICatBreedClassifier, CatBreedClassifier>();
+            services.AddSingleton<IFileHelper, FileHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

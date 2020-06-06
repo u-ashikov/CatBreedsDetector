@@ -2,7 +2,7 @@
 {
     using Classification.Interfaces;
     using Common;
-    using Microsoft.AspNetCore.Http;
+    using Infrastructure.Helpers.Contracts;
     using Microsoft.AspNetCore.Mvc;
     using Models;
     using System.IO;
@@ -15,9 +15,12 @@
     {
         private readonly ICatBreedClassifier catBreedClassifier;
 
-        public CatBreedsController(ICatBreedClassifier catBreedClassifier)
+        private readonly IFileHelper fileHelper;
+
+        public CatBreedsController(ICatBreedClassifier catBreedClassifier, IFileHelper fileHelper)
         {
             this.catBreedClassifier = catBreedClassifier;
+            this.fileHelper = fileHelper;
         }
 
         [HttpPost]
@@ -28,36 +31,15 @@
             var predictedImagesDirectoryPath = buildDir + $@"\{Constants.FilePath.PredictedImages}";
             var imagePath = predictedImagesDirectoryPath + $@"\{model.CatImage.FileName}";
 
-            this.DeleteAlreadyPredictedImages(predictedImagesDirectoryPath);
+            this.fileHelper.DeleteFilesInDirectory(predictedImagesDirectoryPath);
 
-            await this.SaveImageToFileAsync(imagePath, model.CatImage);
+            await this.fileHelper.SaveImageToFileAsync(imagePath, model.CatImage);
 
             var prediction = this.catBreedClassifier.ClassifySingleImage(imagePath);
 
             var predictionResult = new CatBreedPredictionResultModel(prediction.PredictedLabelValue, prediction.PredictionProbability);
 
             return this.Ok(predictionResult);
-        }
-
-        private void DeleteAlreadyPredictedImages(string directoryPath)
-        {
-            if (Directory.Exists(directoryPath))
-            {
-                var predictedDirectory = new DirectoryInfo(directoryPath);
-
-                foreach (var file in predictedDirectory.GetFiles())
-                {
-                    file.Delete();
-                }
-            }
-        }
-
-        private async Task SaveImageToFileAsync(string imagePath, IFormFile imageFile)
-        {
-            using (var stream = System.IO.File.Create(imagePath))
-            {
-                await imageFile.CopyToAsync(stream);
-            }
         }
     }
 }
