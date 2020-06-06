@@ -7,6 +7,9 @@
     using System.IO;
     using System.Linq;
 
+    /// <summary>
+    /// This attribute validates the allowed file extensions.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class CustomFileExtensionAttribute : ValidationAttribute
     {
