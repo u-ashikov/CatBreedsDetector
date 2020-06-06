@@ -50,8 +50,7 @@
                 url: null,
                 predictedBreed: null,
                 predictionProbability: null,
-                errors: [],
-                error: null
+                errors: []
             }
         },
         computed: {
