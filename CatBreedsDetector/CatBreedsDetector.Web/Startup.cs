@@ -10,6 +10,7 @@ namespace CatBreedsDetector.Web
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using NLog;
     using VueCliMiddleware;
 
     public class Startup
@@ -43,6 +44,8 @@ namespace CatBreedsDetector.Web
 
             services.AddSingleton<ICatBreedClassifier, CatBreedClassifier>();
             services.AddSingleton<IFileHelper, FileHelper>();
+            services.AddSingleton<ILogHelper, LogHelper>();
+            services.AddSingleton<ILogger>(_ => LogManager.GetLogger("FileLogger"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
