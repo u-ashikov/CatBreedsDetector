@@ -17,10 +17,13 @@
 
         private readonly IFileHelper fileHelper;
 
-        public CatBreedsController(ICatBreedClassifier catBreedClassifier, IFileHelper fileHelper)
+        private readonly ILogHelper logger;
+
+        public CatBreedsController(ICatBreedClassifier catBreedClassifier, IFileHelper fileHelper, ILogHelper logger)
         {
             this.catBreedClassifier = catBreedClassifier;
             this.fileHelper = fileHelper;
+            this.logger = logger;
         }
 
         [HttpPost]
