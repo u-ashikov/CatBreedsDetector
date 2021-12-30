@@ -1,13 +1,13 @@
 ﻿namespace CatBreedsDetector.Web.Controllers
 {
-    using Classification.Interfaces;
-    using Common;
-    using Infrastructure.Helpers.Contracts;
-    using Microsoft.AspNetCore.Mvc;
-    using Models;
     using System.IO;
     using System.Reflection;
     using System.Threading.Tasks;
+    using CatBreedsDetector.Classification.Interfaces;
+    using CatBreedsDetector.Common;
+    using CatBreedsDetector.Web.Infrastructure.Helpers.Contracts;
+    using CatBreedsDetector.Web.Models;
+    using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
     [Route("api/[controller]")]
@@ -17,13 +17,10 @@
 
         private readonly IFileHelper fileHelper;
 
-        private readonly ILogHelper logger;
-
-        public CatBreedsController(ICatBreedClassifier catBreedClassifier, IFileHelper fileHelper, ILogHelper logger)
+        public CatBreedsController(ICatBreedClassifier catBreedClassifier, IFileHelper fileHelper)
         {
             this.catBreedClassifier = catBreedClassifier;
             this.fileHelper = fileHelper;
-            this.logger = logger;
         }
 
         [HttpPost]

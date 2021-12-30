@@ -1,33 +1,40 @@
 ﻿namespace CatBreedsDetector.Web.Infrastructure.Attributes
 {
-    using Common;
-    using Microsoft.AspNetCore.Http;
     using System;
     using System.ComponentModel.DataAnnotations;
+    using CatBreedsDetector.Common;
+    using Microsoft.AspNetCore.Http;
 
     /// <summary>
-    /// This attribute validates the allowed file size.
+    /// A custom attribute that validates the allowed file size.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class FileSizeAttribute : ValidationAttribute
     {
-        public long MinFileSize { get; set; }
-
-        public long MaxFileSize { get; }
-
         /// <summary>
-        ///     Initializes a new instance of the <see cref="FileSizeAttribute" /> class.
+        /// Initializes a new instance of the <see cref="FileSizeAttribute" /> class.
         /// </summary>
         /// <param name="maxFileSize">
-        ///     The maximum allowable length of a file in megabytes.
-        ///     Value must be greater than or equal to zero.
+        /// The maximum allowable length of a file in megabytes.
+        /// Value must be greater than or equal to zero.
         /// </param>
         public FileSizeAttribute(long maxFileSize)
-            :base(Constants.Message.InvalidFileSize)
+            : base(Constants.Message.InvalidFileSize)
         {
-            MaxFileSize = maxFileSize;
+            this.MaxFileSize = maxFileSize;
         }
 
+        /// <summary>
+        /// Gets or sets a minimum size of a file.
+        /// </summary>
+        public long MinFileSize { get; set; }
+
+        /// <summary>
+        /// Gets a maximum size of a file.
+        /// </summary>
+        public long MaxFileSize { get; }
+
+        /// <inheritdoc />
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (value == null)
@@ -37,7 +44,7 @@
 
             this.ValidateFileSizes();
 
-            var lengthInMb = ((IFormFile) value).Length / (Constants.FileSize.MbSize * Constants.FileSize.MbSize);
+            var lengthInMb = ((IFormFile)value).Length / (Constants.FileSize.MbSize * Constants.FileSize.MbSize);
 
             var isValid = lengthInMb >= this.MinFileSize && lengthInMb <= this.MaxFileSize;
 

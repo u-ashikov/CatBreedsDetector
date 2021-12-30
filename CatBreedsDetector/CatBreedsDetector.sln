@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Web", "Ca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Common", "CatBreedsDetector.Common\CatBreedsDetector.Common.csproj", "{79A4E903-04F3-4CEF-AF12-56427B74AC9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.TrainingGround", "CatBreedsDetector.TrainingGround\CatBreedsDetector.TrainingGround.csproj", "{0FCFF410-C919-49AB-979A-BF5F7AA0DD57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.TrainingGround", "CatBreedsDetector.TrainingGround\CatBreedsDetector.TrainingGround.csproj", "{0FCFF410-C919-49AB-979A-BF5F7AA0DD57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4BF31571-9F36-4E66-B2C2-01C6FB3E8B59}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

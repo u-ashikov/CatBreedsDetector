@@ -1,9 +1,9 @@
 ﻿namespace CatBreedsDetector.Web.Models
 {
-    using Common;
-    using Infrastructure.Attributes;
-    using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
+    using CatBreedsDetector.Common;
+    using CatBreedsDetector.Web.Infrastructure.Attributes;
+    using Microsoft.AspNetCore.Http;
 
     public class CatBreedDetectInputModel
     {
