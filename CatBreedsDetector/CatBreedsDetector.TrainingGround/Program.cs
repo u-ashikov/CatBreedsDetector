@@ -27,7 +27,7 @@
                     foreach (var file in files)
                     {
                         var fileInfo = new FileInfo(file);
-                        
+
                         fileWriter.WriteLine(string.Concat(fileInfo.Name, TrainingTagsSeparatorChar, directoryInfo.Name));
                     }
                 }

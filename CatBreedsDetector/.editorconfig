@@ -17,3 +17,6 @@ dotnet_diagnostic.SA1633.severity = none
 
 # SA1309: Field names should not begin with underscore
 dotnet_diagnostic.SA1309.severity = none
+
+# SA1028: Code should not contain trailing whitespace
+dotnet_diagnostic.SA1028.severity = error
