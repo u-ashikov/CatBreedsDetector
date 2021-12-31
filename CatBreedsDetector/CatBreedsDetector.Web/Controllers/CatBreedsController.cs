@@ -1,44 +1,41 @@
 ﻿namespace CatBreedsDetector.Web.Controllers
 {
-    using Classification.Interfaces;
-    using Common;
-    using Infrastructure.Helpers.Contracts;
-    using Microsoft.AspNetCore.Mvc;
-    using Models;
+    using System;
     using System.IO;
     using System.Reflection;
     using System.Threading.Tasks;
+    using CatBreedsDetector.Classification.Interfaces;
+    using CatBreedsDetector.Common;
+    using CatBreedsDetector.Web.Infrastructure.Helpers.Contracts;
+    using CatBreedsDetector.Web.Models;
+    using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
     [Route("api/[controller]")]
     public class CatBreedsController : ControllerBase
     {
-        private readonly ICatBreedClassifier catBreedClassifier;
+        private readonly ICatBreedClassifier _catBreedClassifier;
 
-        private readonly IFileHelper fileHelper;
+        private readonly IFileHelper _fileHelper;
 
-        private readonly ILogHelper logger;
-
-        public CatBreedsController(ICatBreedClassifier catBreedClassifier, IFileHelper fileHelper, ILogHelper logger)
+        public CatBreedsController(ICatBreedClassifier catBreedClassifier, IFileHelper fileHelper)
         {
-            this.catBreedClassifier = catBreedClassifier;
-            this.fileHelper = fileHelper;
-            this.logger = logger;
+            this._catBreedClassifier = catBreedClassifier ?? throw new ArgumentNullException(nameof(catBreedClassifier));
+            this._fileHelper = fileHelper ?? throw new ArgumentNullException(nameof(fileHelper));
         }
 
-        [HttpPost]
-        [Route("DetectAsync")]
+        [HttpPost(nameof(DetectAsync))]
         public async Task<IActionResult> DetectAsync([FromForm]CatBreedDetectInputModel model)
         {
             var buildDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var predictedImagesDirectoryPath = buildDir + $@"\{Constants.FilePath.PredictedImages}";
             var imagePath = predictedImagesDirectoryPath + $@"\{model.CatImage.FileName}";
 
-            this.fileHelper.DeleteFilesInDirectory(predictedImagesDirectoryPath);
+            this._fileHelper.DeleteFilesInDirectory(predictedImagesDirectoryPath);
 
-            await this.fileHelper.SaveImageToFileAsync(imagePath, model.CatImage);
+            await this._fileHelper.SaveImageToFileAsync(imagePath, model.CatImage);
 
-            var prediction = this.catBreedClassifier.ClassifySingleImage(imagePath);
+            var prediction = this._catBreedClassifier.ClassifySingleImage(imagePath);
 
             var predictionResult = new CatBreedPredictionResultModel(prediction.PredictedLabelValue, prediction.PredictionProbability);
 

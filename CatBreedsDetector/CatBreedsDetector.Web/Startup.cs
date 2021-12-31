@@ -1,9 +1,9 @@
 namespace CatBreedsDetector.Web
 {
-    using Classification;
-    using Classification.Interfaces;
-    using Infrastructure.Helpers.Contracts;
-    using Infrastructure.Helpers.Implementations;
+    using CatBreedsDetector.Classification;
+    using CatBreedsDetector.Classification.Interfaces;
+    using CatBreedsDetector.Web.Infrastructure.Helpers.Contracts;
+    using CatBreedsDetector.Web.Infrastructure.Helpers.Implementations;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -17,7 +17,7 @@ namespace CatBreedsDetector.Web
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -30,11 +30,11 @@ namespace CatBreedsDetector.Web
                 .ConfigureApiBehaviorOptions(options =>
                     {
                         options.SuppressInferBindingSourcesForParameters = true;
-                        options.InvalidModelStateResponseFactory = (actionContext =>
+                        options.InvalidModelStateResponseFactory = actionContext =>
                         {
                             var errors = actionContext.ModelState.Values;
                             return new BadRequestObjectResult(errors);
-                        });
+                        };
                     });
 
             services.AddSpaStaticFiles(configuration =>

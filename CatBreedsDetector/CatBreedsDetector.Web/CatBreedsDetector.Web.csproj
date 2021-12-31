@@ -6,10 +6,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NLog.Config" Version="4.7.2" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.2" />
-    <PackageReference Include="VueCliMiddleware" Version="3.0.0" />
+    <AdditionalFiles Remove="C:\Users\Ulian Ashikov\source\repos\CatBreedsDetector\CatBreedsDetector\\stylecop.json" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NLog.Config" Version="4.7.13" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="VueCliMiddleware" Version="6.0.0" />
+  </ItemGroup>
+  
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Directory.Build.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Directory.Build.props')" />
 
   <ItemGroup>
     <ProjectReference Include="..\CatBreedsDetector.Classification\CatBreedsDetector.Classification.csproj" />
