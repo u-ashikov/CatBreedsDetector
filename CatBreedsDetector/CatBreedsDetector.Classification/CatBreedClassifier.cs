@@ -28,9 +28,7 @@
         public ImagePrediction ClassifySingleImage(string path)
         {
             if (string.IsNullOrEmpty(path) || !File.Exists(path))
-            {
                 throw new ArgumentException(CommonConstants.Constants.Message.MissingOrInvalidFile);
-            }
 
             var imageData = new ImageData()
             {

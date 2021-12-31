@@ -24,9 +24,7 @@
         public void SaveToLog(Exception exception)
         {
             if (exception == null)
-            {
                 return;
-            }
 
             this._logger.Error(exception);
         }

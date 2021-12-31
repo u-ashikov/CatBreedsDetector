@@ -18,6 +18,8 @@
     </PackageReference>
     <PackageReference Include="VueCliMiddleware" Version="6.0.0" />
   </ItemGroup>
+  
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Directory.Build.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Directory.Build.props')" />
 
   <ItemGroup>
     <ProjectReference Include="..\CatBreedsDetector.Classification\CatBreedsDetector.Classification.csproj" />

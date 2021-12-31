@@ -26,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AdditionalFiles Remove="C:\Users\Ulian Ashikov\source\repos\CatBreedsDetector\CatBreedsDetector\\stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="assets\images\Abyssinian.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

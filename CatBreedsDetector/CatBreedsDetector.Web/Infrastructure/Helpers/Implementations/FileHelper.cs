@@ -18,9 +18,7 @@
                 var predictedDirectory = new DirectoryInfo(directoryPath);
 
                 foreach (var file in predictedDirectory.GetFiles())
-                {
                     file.Delete();
-                }
             }
         }
 
@@ -28,9 +26,7 @@
         public async Task SaveImageToFileAsync(string imagePath, IFormFile imageFile)
         {
             if (string.IsNullOrEmpty(imagePath) || imageFile == null)
-            {
                 return;
-            }
 
             using var stream = File.Create(imagePath);
             await imageFile.CopyToAsync(stream);

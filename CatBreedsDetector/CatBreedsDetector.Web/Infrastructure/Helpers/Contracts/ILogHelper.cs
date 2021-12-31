@@ -2,9 +2,6 @@
 {
     using System;
 
-    /// <summary>
-    /// An interface defining the structure of a component used for logging.
-    /// </summary>
     public interface ILogHelper
     {
         /// <summary>
