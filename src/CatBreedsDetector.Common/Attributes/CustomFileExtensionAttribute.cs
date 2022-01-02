@@ -1,10 +1,9 @@
-﻿namespace CatBreedsDetector.Web.Infrastructure.Attributes
+﻿namespace CatBreedsDetector.Common
 {
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.IO;
     using System.Linq;
-    using CatBreedsDetector.Common;
     using Microsoft.AspNetCore.Http;
 
     /// <summary>
@@ -32,7 +31,7 @@
             set => this.extensions = value;
         }
 
-        private string ExtensionsNormalized => this.extensions.Replace(Constants.StringSeparator.Space, string.Empty, StringComparison.Ordinal).ToUpperInvariant();
+        private string ExtensionsNormalized => this.extensions.Replace(Constants.StringSeparator.Space, string.Empty).ToUpperInvariant();
 
         /// <inheritdoc />
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
@@ -45,7 +44,7 @@
             var fileExtension = Path.GetExtension(((IFormFile)value).FileName.ToUpperInvariant());
 
             var isValid = this.ExtensionsNormalized
-                .Split(Constants.StringSeparator.Comma, StringSplitOptions.RemoveEmptyEntries)
+                .Split(new[] { Constants.StringSeparator.Comma }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(e => Constants.StringSeparator.Dot + e)
                 .Contains(fileExtension);
 

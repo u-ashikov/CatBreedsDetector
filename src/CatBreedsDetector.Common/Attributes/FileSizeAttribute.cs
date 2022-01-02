@@ -1,8 +1,7 @@
-﻿namespace CatBreedsDetector.Web.Infrastructure.Attributes
+﻿namespace CatBreedsDetector.Common
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using CatBreedsDetector.Common;
     using Microsoft.AspNetCore.Http;
 
     /// <summary>
@@ -49,9 +48,7 @@
             var isValid = lengthInMb >= this.MinFileSize && lengthInMb <= this.MaxFileSize;
 
             if (!isValid)
-            {
                 return new ValidationResult(string.Format(Constants.Message.MaxFileSize, this.MaxFileSize));
-            }
 
             return ValidationResult.Success;
         }
@@ -59,19 +56,13 @@
         private void ValidateFileSizes()
         {
             if (this.MinFileSize < default(long))
-            {
                 throw new InvalidOperationException(string.Format(Constants.Message.FileSizeCannotBeNegative, nameof(this.MinFileSize)));
-            }
 
             if (this.MaxFileSize < default(long))
-            {
                 throw new InvalidOperationException(string.Format(Constants.Message.FileSizeCannotBeNegative, nameof(this.MaxFileSize)));
-            }
 
             if (this.MinFileSize > this.MaxFileSize)
-            {
                 throw new InvalidOperationException(Constants.Message.MinSizeGreaterThanMaxSize);
-            }
         }
     }
 }

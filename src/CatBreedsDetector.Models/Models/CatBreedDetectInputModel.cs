@@ -1,8 +1,7 @@
-﻿namespace CatBreedsDetector.Web.Models
+﻿namespace CatBreedsDetector.Models
 {
     using System.ComponentModel.DataAnnotations;
     using CatBreedsDetector.Common;
-    using CatBreedsDetector.Web.Infrastructure.Attributes;
     using Microsoft.AspNetCore.Http;
 
     /// <summary>

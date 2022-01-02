@@ -1,4 +1,4 @@
-﻿namespace CatBreedsDetector.Web.Infrastructure.Helpers.Contracts
+﻿namespace CatBreedsDetector.Services.Contracts
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
@@ -6,7 +6,7 @@
     /// <summary>
     /// An interface defining the structure of a component responsible for executing operations with files.
     /// </summary>
-    public interface IFileHelper
+    public interface IFileService
     {
         /// <summary>
         /// Use this method to delete all files in a given directory.

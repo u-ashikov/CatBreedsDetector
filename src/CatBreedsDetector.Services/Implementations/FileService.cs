@@ -1,14 +1,14 @@
-﻿namespace CatBreedsDetector.Web.Infrastructure.Helpers.Implementations
+﻿namespace CatBreedsDetector.Services.Implementations
 {
     using System.IO;
     using System.Threading.Tasks;
-    using CatBreedsDetector.Web.Infrastructure.Helpers.Contracts;
+    using CatBreedsDetector.Services.Contracts;
     using Microsoft.AspNetCore.Http;
 
     /// <summary>
     /// A custom implementation of the <see cref="IFileHelper"/> interface.
     /// </summary>
-    public class FileHelper : IFileHelper
+    public class FileService : IFileService
     {
         /// <inheritdoc />
         public void DeleteFilesInDirectory(string directoryPath)

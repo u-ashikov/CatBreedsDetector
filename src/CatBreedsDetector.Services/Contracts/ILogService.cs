@@ -1,8 +1,11 @@
-﻿namespace CatBreedsDetector.Web.Infrastructure.Helpers.Contracts
+﻿namespace CatBreedsDetector.Services.Contracts
 {
     using System;
 
-    public interface ILogHelper
+    /// <summary>
+    /// An interface defining the structure of a component responsible for logging.
+    /// </summary>
+    public interface ILogService
     {
         /// <summary>
         /// Use this method to log an <see cref="Exception"/> to a file on the file system.

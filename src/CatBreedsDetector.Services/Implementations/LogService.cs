@@ -1,21 +1,21 @@
-﻿namespace CatBreedsDetector.Web.Infrastructure.Helpers.Implementations
+﻿namespace CatBreedsDetector.Services.Implementations
 {
     using System;
-    using CatBreedsDetector.Web.Infrastructure.Helpers.Contracts;
+    using CatBreedsDetector.Services.Contracts;
     using NLog;
 
     /// <summary>
-    /// A custom implementation of the <see cref="ILogHelper"/> interface.
+    /// A custom implementation of the <see cref="ILogService"/> interface.
     /// </summary>
-    public class LogHelper : ILogHelper
+    public class LogService : ILogService
     {
         private readonly ILogger _logger;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LogHelper"/> class.
+        /// Initializes a new instance of the <see cref="LogService"/> class.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> that should be used internally for logging.</param>
-        public LogHelper(ILogger logger)
+        public LogService(ILogger logger)
         {
             this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }

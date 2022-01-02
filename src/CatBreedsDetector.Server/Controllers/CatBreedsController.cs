@@ -6,8 +6,8 @@
     using System.Threading.Tasks;
     using CatBreedsDetector.Classification.Interfaces;
     using CatBreedsDetector.Common;
-    using CatBreedsDetector.Web.Infrastructure.Helpers.Contracts;
-    using CatBreedsDetector.Web.Models;
+    using CatBreedsDetector.Models;
+    using CatBreedsDetector.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
@@ -16,12 +16,12 @@
     {
         private readonly ICatBreedClassifier _catBreedClassifier;
 
-        private readonly IFileHelper _fileHelper;
+        private readonly IFileService _fileService;
 
-        public CatBreedsController(ICatBreedClassifier catBreedClassifier, IFileHelper fileHelper)
+        public CatBreedsController(ICatBreedClassifier catBreedClassifier, IFileService fileService)
         {
             this._catBreedClassifier = catBreedClassifier ?? throw new ArgumentNullException(nameof(catBreedClassifier));
-            this._fileHelper = fileHelper ?? throw new ArgumentNullException(nameof(fileHelper));
+            this._fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
         }
 
         [HttpPost(nameof(DetectAsync))]
@@ -31,9 +31,9 @@
             var predictedImagesDirectoryPath = buildDir + $@"\{Constants.FilePath.PredictedImages}";
             var imagePath = predictedImagesDirectoryPath + $@"\{model.CatImage.FileName}";
 
-            this._fileHelper.DeleteFilesInDirectory(predictedImagesDirectoryPath);
+            this._fileService.DeleteFilesInDirectory(predictedImagesDirectoryPath);
 
-            await this._fileHelper.SaveImageToFileAsync(imagePath, model.CatImage);
+            await this._fileService.SaveImageToFileAsync(imagePath, model.CatImage);
 
             var prediction = this._catBreedClassifier.ClassifySingleImage(imagePath);
 

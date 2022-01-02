@@ -2,8 +2,8 @@ namespace CatBreedsDetector.Web
 {
     using CatBreedsDetector.Classification;
     using CatBreedsDetector.Classification.Interfaces;
-    using CatBreedsDetector.Web.Infrastructure.Helpers.Contracts;
-    using CatBreedsDetector.Web.Infrastructure.Helpers.Implementations;
+    using CatBreedsDetector.Services.Contracts;
+    using CatBreedsDetector.Services.Implementations;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -43,8 +43,8 @@ namespace CatBreedsDetector.Web
             });
 
             services.AddSingleton<ICatBreedClassifier, CatBreedClassifier>();
-            services.AddSingleton<IFileHelper, FileHelper>();
-            services.AddSingleton<ILogHelper, LogHelper>();
+            services.AddSingleton<IFileService, FileService>();
+            services.AddSingleton<ILogService, LogService>();
             services.AddSingleton<ILogger>(_ => LogManager.GetLogger("FileLogger"));
         }
 

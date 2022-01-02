@@ -28,6 +28,8 @@
   <ItemGroup>
     <ProjectReference Include="..\CatBreedsDetector.Classification\CatBreedsDetector.Classification.csproj" />
     <ProjectReference Include="..\CatBreedsDetector.Common\CatBreedsDetector.Common.csproj" />
+    <ProjectReference Include="..\CatBreedsDetector.Models\CatBreedsDetector.Models.csproj" />
+    <ProjectReference Include="..\CatBreedsDetector.Services\CatBreedsDetector.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
