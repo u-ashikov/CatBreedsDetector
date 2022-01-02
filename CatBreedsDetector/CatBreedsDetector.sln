@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Classification", "CatBreedsDetector.Classification\CatBreedsDetector.Classification.csproj", "{C7169B09-CACD-4897-981C-3CB0A7969A2D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Web", "CatBreedsDetector.Web\CatBreedsDetector.Web.csproj", "{9909395E-8D9B-4C7F-9393-FD9A754EFF9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Server", "CatBreedsDetector.Web\CatBreedsDetector.Server.csproj", "{9909395E-8D9B-4C7F-9393-FD9A754EFF9D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Common", "CatBreedsDetector.Common\CatBreedsDetector.Common.csproj", "{79A4E903-04F3-4CEF-AF12-56427B74AC9F}"
 EndProject
