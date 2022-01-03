@@ -11,7 +11,6 @@ namespace CatBreedsDetector.Web
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using NLog;
-    using VueCliMiddleware;
 
     public class Startup
     {
@@ -37,11 +36,6 @@ namespace CatBreedsDetector.Web
                         };
                     });
 
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp";
-            });
-
             services.AddSingleton<ICatBreedClassifier, CatBreedClassifier>();
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<ILogService, LogService>();
@@ -57,21 +51,10 @@ namespace CatBreedsDetector.Web
             }
 
             app.UseRouting();
-            app.UseSpaStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
-
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = env.IsDevelopment() ? "ClientApp" : "dist";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseVueCli(npmScript: "serve");
-                }
             });
         }
     }
