@@ -6,5 +6,5 @@ const axiosInstance = axios.create({
 
 // TODO: Should return a model containing information about the prediction or error.
 export function upload(formData: FormData) {
-  return axiosInstance.post("/CatBreeds/DetectAsync", formData);
+  return axios.post("/CatBreeds/DetectAsync", formData);
 }

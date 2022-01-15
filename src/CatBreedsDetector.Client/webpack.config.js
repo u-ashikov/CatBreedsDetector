@@ -1,7 +1,8 @@
+const Dotenv = require("dotenv-webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-module.exports = {
+module.exports = (env) => ({
   entry: "./src/index.tsx",
   output: { path: path.join(__dirname, "build"), filename: "index.bundle.js" },
   mode: process.env.NODE_ENV || "development",
@@ -39,5 +40,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "index.html"),
     }),
+    new Dotenv({ path: `./.env.${env.mode}` }),
   ],
-};
+});
