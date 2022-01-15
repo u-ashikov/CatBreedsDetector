@@ -1,10 +1,9 @@
 import axios from "axios";
-
-const axiosInstance = axios.create({
-  baseURL: "http://localhost:59999/api",
-});
+import { getApiUrl } from "../helpers/apiHelpers";
 
 // TODO: Should return a model containing information about the prediction or error.
 export function upload(formData: FormData) {
-  return axios.post("/CatBreeds/DetectAsync", formData);
+  const apiUrl = getApiUrl();
+
+  return axios.post(`${apiUrl}/api/CatBreeds/DetectAsync`, formData);
 }
