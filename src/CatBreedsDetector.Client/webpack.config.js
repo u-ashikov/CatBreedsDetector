@@ -11,7 +11,7 @@ module.exports = (env) => ({
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, "src"),
+      directory: path.join(__dirname, "public"),
     },
   },
   module: {
