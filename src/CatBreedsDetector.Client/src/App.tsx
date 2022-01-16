@@ -1,10 +1,11 @@
 import React from "react";
-import Main from "./components/Main";
+import Layout from "./components/common/Layout";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App: React.FC<{}> = () => {
   return (
     <>
-      <Main />
+      <Layout />
     </>
   );
 };
