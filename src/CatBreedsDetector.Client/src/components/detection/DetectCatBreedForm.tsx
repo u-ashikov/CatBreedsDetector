@@ -63,9 +63,7 @@ export default class DetectCatBreedForm extends React.Component<
           <div>
             <h2>Uploaded failed.</h2>
             <p>
-              <a href="javascript:void(0)" onClick={this.resetForm}>
-                Try again
-              </a>
+              <a onClick={this.resetForm}>Try again</a>
             </p>
           </div>
         )}
@@ -73,12 +71,16 @@ export default class DetectCatBreedForm extends React.Component<
           <div>
             <h2>File uploaded successfully.</h2>
             <p>
-              <a href="javascript:void(0)" onClick={this.resetForm}>
-                Upload again
-              </a>
+              <a onClick={this.resetForm}>Upload again</a>
             </p>
-            <h1>Your cats is: Some</h1>
-            <h2>(Probability: 100%</h2>
+            <h1>Your cats is: {this.state.catBreedPredictionResult.breed}</h1>
+            <h2>
+              Probability:
+              {Math.ceil(
+                this.state.catBreedPredictionResult.predictionProbability * 100
+              ).toFixed(2)}
+              %
+            </h2>
             <img
               src={this.state.imageUrl}
               className="img-responsive img-thumbnail"
@@ -90,7 +92,9 @@ export default class DetectCatBreedForm extends React.Component<
     );
   }
 
-  private handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
+  private async handleChange(
+    e: React.ChangeEvent<HTMLInputElement>
+  ): Promise<void> {
     if (!e?.target?.files || e.target.files.length != 1) return;
 
     const imageToUpload = e.target.files[0];
@@ -101,16 +105,20 @@ export default class DetectCatBreedForm extends React.Component<
       imageUrl: imageUrl,
       uploadStatus: UploadStatus.Saving,
     });
+
+    await this.uploadImage(imageToUpload);
   }
 
-  private async uploadImage(): Promise<void> {
+  private async uploadImage(imageToUpload: File): Promise<void> {
     this.setState({ uploadStatus: UploadStatus.Saving });
 
-    await uploadImage(this.state.imageToUpload)
-      .then((x) => {
-        this.setState({ uploadStatus: UploadStatus.Success, errors: [] });
-        // this.predictedBreed = x.data.breed;
-        // this.predictionProbability = x.data.predictionProbability;
+    await uploadImage(imageToUpload)
+      .then((response) => {
+        this.setState({
+          uploadStatus: UploadStatus.Success,
+          catBreedPredictionResult: response?.data,
+          errors: [],
+        });
       })
       .catch((error) => {
         if (error && error.response.status == 400) {
@@ -131,7 +139,7 @@ export default class DetectCatBreedForm extends React.Component<
 
   private resetForm(): void {
     this.setState({
-      imageUrl: "",
+      imageUrl: null,
       imageToUpload: null,
       errors: [],
       uploadStatus: UploadStatus.Initial,
