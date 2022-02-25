@@ -2,13 +2,11 @@ import React from "react";
 import Footer from "./Footer";
 import NavBar from "../navigation/NavBar";
 import NavItem from "../navigation/NavItem";
-import Home from "./Home";
 import DetectCatBreedForm from "../detection/DetectCatBreedForm";
 import About from "./About";
 import "../../styles/main.css";
 
 interface ILayoutState {
-  displayHome: boolean;
   displayDetectBreedForm: boolean;
   displayAbout: boolean;
 }
@@ -18,9 +16,8 @@ export default class Layout extends React.Component<{}, ILayoutState> {
     super(props);
 
     this.state = {
-      displayHome: false,
       displayDetectBreedForm: false,
-      displayAbout: false,
+      displayAbout: true,
     };
   }
 
@@ -35,7 +32,6 @@ export default class Layout extends React.Component<{}, ILayoutState> {
         <hr />
         <div className="row">
           <NavBar>
-            <NavItem linkText="Home" onClick={() => this.shouldDisplayHome()} />
             <NavItem
               linkText="Detect Breed"
               onClick={() => this.shouldDisplayDetectBreedForm()}
@@ -46,7 +42,6 @@ export default class Layout extends React.Component<{}, ILayoutState> {
             />
           </NavBar>
           <div className="col-9">
-            {this.state.displayHome && <Home />}
             {this.state.displayDetectBreedForm && <DetectCatBreedForm />}
             {this.state.displayAbout && <About />}
           </div>
@@ -56,21 +51,12 @@ export default class Layout extends React.Component<{}, ILayoutState> {
     );
   }
 
-  private shouldDisplayHome(): void {
-    if (this.state.displayHome) return;
-
-    this.setState({
-      displayHome: !this.state.displayHome,
-      displayAbout: false,
-    });
-  }
-
   private shouldDisplayAbout(): void {
     if (this.state.displayAbout) return;
 
     this.setState({
       displayAbout: !this.state.displayAbout,
-      displayHome: false,
+      displayDetectBreedForm: false,
     });
   }
 
@@ -79,7 +65,6 @@ export default class Layout extends React.Component<{}, ILayoutState> {
 
     this.setState({
       displayDetectBreedForm: !this.state.displayDetectBreedForm,
-      displayHome: false,
       displayAbout: false,
     });
   }
