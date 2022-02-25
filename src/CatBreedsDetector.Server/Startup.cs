@@ -52,6 +52,14 @@ namespace CatBreedsDetector.Web
 
             app.UseRouting();
 
+            app.UseCors(builder =>
+            {
+                builder
+                    .WithOrigins("http://localhost:8080")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
