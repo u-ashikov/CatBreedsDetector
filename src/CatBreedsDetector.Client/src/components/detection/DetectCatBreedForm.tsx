@@ -32,38 +32,40 @@ export default class DetectCatBreedForm extends React.Component<
   public render(): JSX.Element {
     return (
       <>
-        <form method="post" encType="multipart/form-data">
-          <div className="dropbox">
-            <input
-              className="input-file"
-              type="file"
-              accept="image/*"
-              name="catImage"
-              onChange={(e) => this.handleChange(e)}
-            />
-            {this.state.uploadStatus === UploadStatus.Initial && (
+        {this.state.uploadStatus === UploadStatus.Initial && (
+          <form method="post" encType="multipart/form-data">
+            <div className="dropbox">
+              <input
+                className="input-file"
+                type="file"
+                accept="image/*"
+                name="catImage"
+                onChange={(e) => this.handleImageChange(e)}
+              />
               <p>
                 Drag your file here to begin
                 <br /> or click to browse
               </p>
-            )}
-            {this.state.uploadStatus === UploadStatus.Saving && (
-              <div>
-                <p>Uploading the file...</p>
-                <img
-                  src={this.state.imageUrl}
-                  className="img-responsive img-thumbnail"
-                  alt={this.state.imageToUpload?.name}
-                />
-              </div>
-            )}
+            </div>
+          </form>
+        )}
+        {this.state.uploadStatus === UploadStatus.Saving && (
+          <div>
+            <p>Uploading the file...</p>
+            <img
+              src={this.state.imageUrl}
+              className="img-responsive img-thumbnail"
+              alt={this.state.imageToUpload?.name}
+            />
           </div>
-        </form>
+        )}
         {this.state.uploadStatus === UploadStatus.Failed && (
           <div>
             <h2>Uploaded failed.</h2>
             <p>
-              <a onClick={this.resetForm}>Try again</a>
+              <a className="inactive-link" onClick={this.resetForm}>
+                Try again
+              </a>
             </p>
           </div>
         )}
@@ -71,7 +73,9 @@ export default class DetectCatBreedForm extends React.Component<
           <div>
             <h2>File uploaded successfully.</h2>
             <p>
-              <a onClick={this.resetForm}>Upload again</a>
+              <a className="inactive-link" onClick={this.resetForm}>
+                Upload again
+              </a>
             </p>
             <h1>Your cats is: {this.state.catBreedPredictionResult.breed}</h1>
             <h2>
@@ -92,7 +96,7 @@ export default class DetectCatBreedForm extends React.Component<
     );
   }
 
-  private async handleChange(
+  private async handleImageChange(
     e: React.ChangeEvent<HTMLInputElement>
   ): Promise<void> {
     if (!e?.target?.files || e.target.files.length != 1) return;
@@ -137,12 +141,12 @@ export default class DetectCatBreedForm extends React.Component<
       });
   }
 
-  private resetForm(): void {
+  private resetForm = (): void => {
     this.setState({
       imageUrl: null,
       imageToUpload: null,
       errors: [],
       uploadStatus: UploadStatus.Initial,
     });
-  }
+  };
 }

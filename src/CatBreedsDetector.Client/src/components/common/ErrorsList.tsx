@@ -8,15 +8,19 @@ export default class ErrorsList extends React.Component<IErrorsListProps> {
   public render(): JSX.Element {
     return (
       this.props.errors && (
-        <ul>{this.props.errors.map(this.renderSingleError)}</ul>
+        <ul>
+          {this.props.errors.map((error, index) =>
+            this.renderSingleError(error, index)
+          )}
+        </ul>
       )
     );
   }
 
-  private renderSingleError(error: string): JSX.Element {
+  private renderSingleError(error: string, index: number): JSX.Element {
     return (
-      <li v-for="error in errors" v-bind:key="error" className="text-danger">
-        <i className="fas fa-times-circle text-danger"></i> {{ error }}
+      <li key={index} className="text-danger">
+        <i className="fas fa-times-circle text-danger"></i> <span>{error}</span>
       </li>
     );
   }

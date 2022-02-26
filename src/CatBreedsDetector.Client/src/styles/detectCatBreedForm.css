@@ -30,3 +30,11 @@ input[type="file"] {
   text-align: center;
   padding: 50px 0;
 }
+
+.inactive-link {
+  text-decoration: underline;
+}
+
+.inactive-link:hover {
+  cursor: pointer;
+}
