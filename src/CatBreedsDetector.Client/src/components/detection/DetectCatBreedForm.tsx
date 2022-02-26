@@ -4,6 +4,7 @@ import ErrorsList from "../common/ErrorsList";
 import { uploadImage } from "../../services/CatBreedsService";
 import "../../styles/detectCatBreedForm.css";
 import { ICatBreedDetectionResult } from "../../models/detection/ICatBreedDetectionResult";
+import CatBreedPrediction from "../detection/CatBreedPrediction";
 
 interface IDetectCatBreedFormProps {}
 
@@ -77,14 +78,9 @@ export default class DetectCatBreedForm extends React.Component<
                 Upload again
               </a>
             </p>
-            <h1>Your cats is: {this.state.catBreedPredictionResult.breed}</h1>
-            <h2>
-              Probability:
-              {Math.ceil(
-                this.state.catBreedPredictionResult.predictionProbability * 100
-              ).toFixed(2)}
-              %
-            </h2>
+            <CatBreedPrediction
+              prediction={this.state.catBreedPredictionResult}
+            />
             <img
               src={this.state.imageUrl}
               className="img-responsive img-thumbnail"
