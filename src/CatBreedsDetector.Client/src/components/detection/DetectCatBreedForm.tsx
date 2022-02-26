@@ -1,10 +1,10 @@
 import React from "react";
-import { UploadStatus } from "../../models/enums/UploadStatus";
-import ErrorsList from "../common/ErrorsList";
-import { uploadImage } from "../../services/CatBreedsService";
-import "../../styles/detectCatBreedForm.css";
-import { ICatBreedDetectionResult } from "../../models/detection/ICatBreedDetectionResult";
-import CatBreedPrediction from "../detection/CatBreedPrediction";
+import { UploadStatus } from "models/enums/UploadStatus";
+import ErrorsList from "components/common/ErrorsList";
+import { uploadImage } from "services/CatBreedsService";
+import "styles/detectCatBreedForm.css";
+import { ICatBreedDetectionResult } from "models/detection/ICatBreedDetectionResult";
+import CatBreedPrediction from "components/detection/CatBreedPrediction";
 
 interface IDetectCatBreedFormProps {}
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/navItem.css";
+import "styles/navItem.css";
 
 interface INavItemProps {
   linkText: string;

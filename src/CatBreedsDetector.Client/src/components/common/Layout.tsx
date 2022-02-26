@@ -1,10 +1,10 @@
 import React from "react";
-import Footer from "./Footer";
-import NavBar from "../navigation/NavBar";
-import NavItem from "../navigation/NavItem";
-import DetectCatBreedForm from "../detection/DetectCatBreedForm";
-import About from "./About";
-import "../../styles/main.css";
+import Footer from "components/common/Footer";
+import NavBar from "components/navigation/NavBar";
+import NavItem from "components/navigation/NavItem";
+import DetectCatBreedForm from "components/detection/DetectCatBreedForm";
+import About from "components/common/About";
+import "styles/main.css";
 
 interface ILayoutState {
   displayDetectBreedForm: boolean;

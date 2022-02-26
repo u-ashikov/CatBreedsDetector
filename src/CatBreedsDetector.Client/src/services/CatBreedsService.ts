@@ -1,6 +1,6 @@
 import axios from "axios";
-import { getApiUrl } from "../helpers/apiHelpers";
-import { ICatBreedDetectionResult } from "../models/detection/ICatBreedDetectionResult";
+import { getApiUrl } from "helpers/apiHelpers";
+import { ICatBreedDetectionResult } from "models/detection/ICatBreedDetectionResult";
 
 export function uploadImage(imageToUpload: File) {
   const apiUrl = getApiUrl();

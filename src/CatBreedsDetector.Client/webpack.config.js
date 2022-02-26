@@ -7,6 +7,13 @@ module.exports = (env) => ({
   output: { path: path.join(__dirname, "build"), filename: "index.bundle.js" },
   mode: process.env.NODE_ENV || "development",
   resolve: {
+    alias: {
+      components: path.resolve(__dirname, "./src/components"),
+      models: path.resolve(__dirname, "./src/models"),
+      services: path.resolve(__dirname, "./src/services"),
+      helpers: path.resolve(__dirname, "./src/helpers"),
+      styles: path.resolve(__dirname, "./src/styles"),
+    },
     extensions: [".tsx", ".ts", ".js"],
   },
   devServer: {
