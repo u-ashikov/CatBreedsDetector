@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Classification", "CatBreedsDetector.Classification\CatBreedsDetector.Classification.csproj", "{C7169B09-CACD-4897-981C-3CB0A7969A2D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Common", "CatBreedsDetector.Common\CatBreedsDetector.Common.csproj", "{79A4E903-04F3-4CEF-AF12-56427B74AC9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.TrainingGround", "CatBreedsDetector.TrainingGround\CatBreedsDetector.TrainingGround.csproj", "{0FCFF410-C919-49AB-979A-BF5F7AA0DD57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4BF31571-9F36-4E66-B2C2-01C6FB3E8B59}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		stylecop.json = stylecop.json
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Models", "CatBreedsDetector.Models\CatBreedsDetector.Models.csproj", "{9964A56D-AC45-45FF-A83C-54A28509EA89}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Services", "CatBreedsDetector.Services\CatBreedsDetector.Services.csproj", "{BB4F571B-582B-4081-A969-7B8EE5F1A44A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Server", "CatBreedsDetector.Server\CatBreedsDetector.Server.csproj", "{EBDD5977-A633-4569-AB23-22BF5A8D9597}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7169B09-CACD-4897-981C-3CB0A7969A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7169B09-CACD-4897-981C-3CB0A7969A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7169B09-CACD-4897-981C-3CB0A7969A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7169B09-CACD-4897-981C-3CB0A7969A2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79A4E903-04F3-4CEF-AF12-56427B74AC9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79A4E903-04F3-4CEF-AF12-56427B74AC9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79A4E903-04F3-4CEF-AF12-56427B74AC9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79A4E903-04F3-4CEF-AF12-56427B74AC9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FCFF410-C919-49AB-979A-BF5F7AA0DD57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FCFF410-C919-49AB-979A-BF5F7AA0DD57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FCFF410-C919-49AB-979A-BF5F7AA0DD57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FCFF410-C919-49AB-979A-BF5F7AA0DD57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9964A56D-AC45-45FF-A83C-54A28509EA89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9964A56D-AC45-45FF-A83C-54A28509EA89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9964A56D-AC45-45FF-A83C-54A28509EA89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9964A56D-AC45-45FF-A83C-54A28509EA89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB4F571B-582B-4081-A969-7B8EE5F1A44A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB4F571B-582B-4081-A969-7B8EE5F1A44A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB4F571B-582B-4081-A969-7B8EE5F1A44A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB4F571B-582B-4081-A969-7B8EE5F1A44A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBDD5977-A633-4569-AB23-22BF5A8D9597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBDD5977-A633-4569-AB23-22BF5A8D9597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBDD5977-A633-4569-AB23-22BF5A8D9597}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBDD5977-A633-4569-AB23-22BF5A8D9597}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2ECF3A1-9A31-4AAF-AC96-AE7BE5BDE69A}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Indie-Flower";
+  src: url("../../public/fonts/IndieFlower-Regular.ttf");
+}
+
+#app {
+  font-family: Indie-Flower;
+  font-size: 1.4em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}

@@ -349,3 +349,6 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /CatBreedsDetector/CatBreedsDetector.Classification/assets/images
+src/CatBreedsDetector.Client/package-lock.json
+src/CatBreedsDetector.Client/build/index.bundle.js
+src/CatBreedsDetector.Client/.env.development
