@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Classification", "CatBreedsDetector.Classification\CatBreedsDetector.Classification.csproj", "{C7169B09-CACD-4897-981C-3CB0A7969A2D}"
 EndProject
@@ -20,6 +20,16 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Services", "CatBreedsDetector.Services\CatBreedsDetector.Services.csproj", "{BB4F571B-582B-4081-A969-7B8EE5F1A44A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Server", "CatBreedsDetector.Server\CatBreedsDetector.Server.csproj", "{EBDD5977-A633-4569-AB23-22BF5A8D9597}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1548D137-E07B-43BC-8523-440394AEABE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Server.Integration", "CatBreedsDetector.Server.Integration\CatBreedsDetector.Server.Integration.csproj", "{2731CA4E-5FCF-4AC9-BE2A-BDD8385B956E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Primitives", "CatBreedsDetector.Primitives\CatBreedsDetector.Primitives.csproj", "{92088E39-599F-4296-A50A-E69006B8FABA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Services.Integration", "CatBreedsDetector.Services.Integration\CatBreedsDetector.Services.Integration.csproj", "{05A369A0-1E92-408F-A5E6-3F0281E13575}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Tests.Common", "CatBreedsDetector.Tests.Common\CatBreedsDetector.Tests.Common.csproj", "{CF037B5B-408F-4984-BC43-AA7D3EE294F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +61,30 @@ Global
 		{EBDD5977-A633-4569-AB23-22BF5A8D9597}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBDD5977-A633-4569-AB23-22BF5A8D9597}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBDD5977-A633-4569-AB23-22BF5A8D9597}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2731CA4E-5FCF-4AC9-BE2A-BDD8385B956E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2731CA4E-5FCF-4AC9-BE2A-BDD8385B956E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2731CA4E-5FCF-4AC9-BE2A-BDD8385B956E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2731CA4E-5FCF-4AC9-BE2A-BDD8385B956E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92088E39-599F-4296-A50A-E69006B8FABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92088E39-599F-4296-A50A-E69006B8FABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92088E39-599F-4296-A50A-E69006B8FABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92088E39-599F-4296-A50A-E69006B8FABA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A369A0-1E92-408F-A5E6-3F0281E13575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A369A0-1E92-408F-A5E6-3F0281E13575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A369A0-1E92-408F-A5E6-3F0281E13575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A369A0-1E92-408F-A5E6-3F0281E13575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF037B5B-408F-4984-BC43-AA7D3EE294F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF037B5B-408F-4984-BC43-AA7D3EE294F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF037B5B-408F-4984-BC43-AA7D3EE294F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF037B5B-408F-4984-BC43-AA7D3EE294F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2731CA4E-5FCF-4AC9-BE2A-BDD8385B956E} = {1548D137-E07B-43BC-8523-440394AEABE0}
+		{05A369A0-1E92-408F-A5E6-3F0281E13575} = {1548D137-E07B-43BC-8523-440394AEABE0}
+		{CF037B5B-408F-4984-BC43-AA7D3EE294F2} = {1548D137-E07B-43BC-8523-440394AEABE0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2ECF3A1-9A31-4AAF-AC96-AE7BE5BDE69A}
