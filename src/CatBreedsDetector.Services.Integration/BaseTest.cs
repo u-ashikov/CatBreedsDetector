@@ -7,7 +7,7 @@
     {
         protected readonly IFileService _fileService;
 
-        public BaseTest()
+        protected BaseTest()
         {
             this._fileService = new FileService();
         }

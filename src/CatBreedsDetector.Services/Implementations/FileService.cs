@@ -6,7 +6,7 @@
     using Microsoft.AspNetCore.Http;
 
     /// <summary>
-    /// A custom implementation of the <see cref="IFileHelper"/> interface.
+    /// A custom implementation of the <see cref="IFileService"/> interface.
     /// </summary>
     public class FileService : IFileService
     {
