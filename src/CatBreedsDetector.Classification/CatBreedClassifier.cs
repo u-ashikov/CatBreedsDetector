@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Linq;
     using CatBreedsDetector.Classification.Common;
     using CatBreedsDetector.Classification.Interfaces;
     using CatBreedsDetector.Classification.Models;

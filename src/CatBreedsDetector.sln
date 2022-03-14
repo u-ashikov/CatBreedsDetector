@@ -23,13 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Server", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1548D137-E07B-43BC-8523-440394AEABE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Server.Integration", "CatBreedsDetector.Server.Integration\CatBreedsDetector.Server.Integration.csproj", "{2731CA4E-5FCF-4AC9-BE2A-BDD8385B956E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Server.Integration", "CatBreedsDetector.Server.Integration\CatBreedsDetector.Server.Integration.csproj", "{2731CA4E-5FCF-4AC9-BE2A-BDD8385B956E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Primitives", "CatBreedsDetector.Primitives\CatBreedsDetector.Primitives.csproj", "{92088E39-599F-4296-A50A-E69006B8FABA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Services.Integration", "CatBreedsDetector.Services.Integration\CatBreedsDetector.Services.Integration.csproj", "{05A369A0-1E92-408F-A5E6-3F0281E13575}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Services.Integration", "CatBreedsDetector.Services.Integration\CatBreedsDetector.Services.Integration.csproj", "{05A369A0-1E92-408F-A5E6-3F0281E13575}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Tests.Common", "CatBreedsDetector.Tests.Common\CatBreedsDetector.Tests.Common.csproj", "{CF037B5B-408F-4984-BC43-AA7D3EE294F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Tests.Common", "CatBreedsDetector.Tests.Common\CatBreedsDetector.Tests.Common.csproj", "{CF037B5B-408F-4984-BC43-AA7D3EE294F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,10 +63,6 @@ Global
 		{2731CA4E-5FCF-4AC9-BE2A-BDD8385B956E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2731CA4E-5FCF-4AC9-BE2A-BDD8385B956E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2731CA4E-5FCF-4AC9-BE2A-BDD8385B956E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92088E39-599F-4296-A50A-E69006B8FABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92088E39-599F-4296-A50A-E69006B8FABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92088E39-599F-4296-A50A-E69006B8FABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92088E39-599F-4296-A50A-E69006B8FABA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05A369A0-1E92-408F-A5E6-3F0281E13575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05A369A0-1E92-408F-A5E6-3F0281E13575}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05A369A0-1E92-408F-A5E6-3F0281E13575}.Release|Any CPU.ActiveCfg = Release|Any CPU
