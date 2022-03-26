@@ -18,7 +18,7 @@
         {
             // Arrange
             var fileName = $"{DirectoryPath}\\{TestsHelper.GenerateRandomString()}";
-            this.CreateFileInDirectory(DirectoryPath, fileName);
+            CreateFileInDirectory(DirectoryPath, fileName);
 
             // Act
             this._fileService.DeleteFilesInDirectory(randomFileName);
@@ -42,7 +42,7 @@
             for (var i = 0; i <= randomFilesCount; i++)
             {
                 var fileName = $"{DirectoryPath}\\{TestsHelper.GenerateRandomString()}";
-                this.CreateFileInDirectory(DirectoryPath, fileName);
+                CreateFileInDirectory(DirectoryPath, fileName);
             }
 
             // Act
@@ -104,7 +104,7 @@
             yield return new object[] { null, FormFileMock.New.Object };
         }
 
-        private void CreateFileInDirectory(string filePath, string fileName)
+        private static void CreateFileInDirectory(string filePath, string fileName)
         {
             if (Directory.Exists(filePath) == false)
                 Directory.CreateDirectory(filePath);

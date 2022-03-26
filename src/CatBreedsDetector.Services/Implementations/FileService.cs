@@ -2,7 +2,7 @@
 {
     using System.IO;
     using System.Threading.Tasks;
-    using CatBreedsDetector.Services.Contracts;
+    using Contracts;
     using Microsoft.AspNetCore.Http;
 
     /// <summary>
