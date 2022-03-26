@@ -1,4 +1,4 @@
-﻿namespace CatBreedsDetector.Models
+﻿namespace CatBreedsDetector.Models.Models
 {
     using System.ComponentModel.DataAnnotations;
     using CatBreedsDetector.Common;
