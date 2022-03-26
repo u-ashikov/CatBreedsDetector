@@ -1,5 +1,6 @@
 ﻿namespace CatBreedsDetector.Tests.Common.Helpers
 {
+    using System.IO;
     using System;
     using System.Linq;
 
@@ -30,6 +31,39 @@
             var random = new Random();
 
             return random.Next(lowerBound, upperBound);
+        }
+
+        /// <summary>
+        /// Use this method to generate random probability between 0 and 1.
+        /// </summary>
+        /// <returns>The randomly generated probability.</returns>
+        public static double GenerateRandomProbability()
+        {
+            var random = new Random();
+
+            return random.NextDouble();
+        }
+        
+        /// <summary>
+        /// Use this method to create a file in a directory.
+        /// </summary>
+        /// <param name="filePath">The path of the file.</param>
+        /// <param name="fileName">The name of the file that should be created.</param>
+        public static void CreateFileInDirectory(string filePath, string fileName)
+        {
+            if (Directory.Exists(filePath) == false)
+                Directory.CreateDirectory(filePath);
+
+            FileStream fileStream = null;
+
+            try
+            {
+                fileStream = File.Create(Path.Combine(fileName));
+            }
+            finally
+            {
+                fileStream?.Dispose();
+            }
         }
     }
 }

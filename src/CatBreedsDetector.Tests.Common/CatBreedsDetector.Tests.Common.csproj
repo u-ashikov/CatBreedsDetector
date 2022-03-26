@@ -9,4 +9,9 @@
     <PackageReference Include="Moq" Version="4.17.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CatBreedsDetector.Classification\CatBreedsDetector.Classification.csproj" />
+    <ProjectReference Include="..\CatBreedsDetector.Services\CatBreedsDetector.Services.csproj" />
+  </ItemGroup>
+
 </Project>

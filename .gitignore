@@ -352,3 +352,5 @@ MigrationBackup/
 src/CatBreedsDetector.Client/package-lock.json
 src/CatBreedsDetector.Client/build/index.bundle.js
 src/CatBreedsDetector.Client/.env.development
+src/.idea
+src/CatBreedsDetector.Client/.idea
