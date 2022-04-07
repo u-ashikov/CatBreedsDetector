@@ -1,8 +1,6 @@
 ﻿namespace CatBreedsDetector.Web.Controllers
 {
     using System;
-    using System.IO;
-    using System.Reflection;
     using System.Threading.Tasks;
     using CatBreedsDetector.Classification.Interfaces;
     using CatBreedsDetector.Common;
@@ -16,7 +14,7 @@
     public class CatBreedsController : ControllerBase
     {
         private const string DirectoryPath = "C:\\Temp\\TestFiles";
-        
+
         private readonly ICatBreedClassifier _catBreedClassifier;
 
         private readonly IFileService _fileService;
@@ -30,7 +28,7 @@
         [HttpPost(nameof(DetectAsync))]
         public async Task<IActionResult> DetectAsync([FromForm] CatBreedDetectInputModel model)
         {
-            if (model is null)
+            if (model is null || !this.ModelState.IsValid)
                 return this.BadRequest();
 
             var predictedImagesDirectoryPath = DirectoryPath + $@"\{Constants.FilePath.PredictedImages}";

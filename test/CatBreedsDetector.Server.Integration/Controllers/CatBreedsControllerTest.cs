@@ -9,7 +9,6 @@
     using CatBreedsDetector.Web.Controllers;
     using MyTested.AspNetCore.Mvc;
     using MyTested.AspNetCore.Mvc.Builders.Contracts.Controllers;
-    using System.Threading.Tasks;
     using Xunit;
     
     public class CatBreedsControllerTest
@@ -18,7 +17,7 @@
         
         [Theory]
         [MemberData(nameof(PrepareInvalidCatBreedDetectionInputModels))]
-        public async Task DetectAsyncWithNullModelShouldReturnBadRequest(CatBreedDetectInputModel inputModel)
+        public void DetectAsyncWithNullModelShouldReturnBadRequest(CatBreedDetectInputModel inputModel)
         {
             // Arrange & Act & Assert
             this.PrepareTestController()
@@ -28,14 +27,16 @@
         }
 
         [Fact]
-        public async Task DetectAsyncShouldWorkCorrectly()
+        public void DetectAsyncShouldWorkCorrectly()
         {
             // Arrange
             var createTestFilesDirectory = Directory.CreateDirectory(DirectoryPath);
             var createPredictedImagesDirectory = Directory.CreateDirectory(Path.Combine(DirectoryPath, "PredictedImages"));
             
             var mockedFormFile = FormFileMock.New;
-            mockedFormFile.SetupGet(f => f.FileName).Returns(TestsHelper.GenerateRandomString());
+            var randomFileName = $"{TestsHelper.GenerateRandomString()}.jpg";
+
+            mockedFormFile.SetupGet(f => f.FileName).Returns(randomFileName);
             
             var inputModel = new CatBreedDetectInputModel() { CatImage = mockedFormFile.Object };
             

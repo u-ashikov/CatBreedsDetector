@@ -10,27 +10,27 @@
 
     public class FileServiceIntegrationTests : BaseTest
     {
-        private const string DirectoryPath = "C:\\Temp\\TestFiles";
+        private const string TempDirectoryPath = "C:\\Temp\\TestFiles";
         
         [Theory]
         [MemberData(nameof(GetRandomFileNames))]
         public void DeleteFilesInDirectoryShouldDeleteNothingWithNonExistingDirectory(string randomFileName)
         {
             // Arrange
-            var fileName = $"{DirectoryPath}\\{TestsHelper.GenerateRandomString()}";
-            TestsHelper.CreateFileInDirectory(DirectoryPath, fileName);
+            var fileName = $"{TempDirectoryPath}\\{TestsHelper.GenerateRandomString()}";
+            TestsHelper.CreateFileInDirectory(TempDirectoryPath, fileName);
 
             // Act
             this._fileService.DeleteFilesInDirectory(randomFileName);
 
             // Assert
-            var existingFiles = Directory.GetFiles(DirectoryPath);
+            var existingFiles = Directory.GetFiles(TempDirectoryPath);
             Assert.NotEmpty(existingFiles);
 
             // Clean up
             File.Delete(fileName);
-            Directory.Delete(DirectoryPath);
-            Assert.False(Directory.Exists(DirectoryPath));
+            Directory.Delete(TempDirectoryPath);
+            Assert.False(Directory.Exists(TempDirectoryPath));
         }
 
         [Fact]
@@ -41,20 +41,20 @@
 
             for (var i = 0; i <= randomFilesCount; i++)
             {
-                var fileName = $"{DirectoryPath}\\{TestsHelper.GenerateRandomString()}";
-                TestsHelper.CreateFileInDirectory(DirectoryPath, fileName);
+                var fileName = $"{TempDirectoryPath}\\{TestsHelper.GenerateRandomString()}";
+                TestsHelper.CreateFileInDirectory(TempDirectoryPath, fileName);
             }
 
             // Act
-            this._fileService.DeleteFilesInDirectory(DirectoryPath);
+            this._fileService.DeleteFilesInDirectory(TempDirectoryPath);
 
             // Assert
-            var existingFiles = Directory.GetFiles(DirectoryPath);
+            var existingFiles = Directory.GetFiles(TempDirectoryPath);
             Assert.Empty(existingFiles);
 
             // Clean up
-            Directory.Delete(DirectoryPath);
-            Assert.False(Directory.Exists(DirectoryPath));
+            Directory.Delete(TempDirectoryPath);
+            Assert.False(Directory.Exists(TempDirectoryPath));
         }
 
         [Theory]
@@ -73,20 +73,21 @@
         {
             // Arrange
             var imageFile = FormFileMock.New.Object;
-            Directory.CreateDirectory(DirectoryPath);
-            var imagePath = $"{DirectoryPath}\\{TestsHelper.GenerateRandomString()}";
+            Directory.CreateDirectory(TempDirectoryPath);
+            
+            var imagePath = $"{TempDirectoryPath}\\{TestsHelper.GenerateRandomString()}";
             
             // Act
             await this._fileService.SaveImageToFileAsync(imagePath, imageFile);
 
             // Assert
-            Assert.True(Directory.Exists(DirectoryPath));
-            Assert.NotEmpty(Directory.GetFiles(DirectoryPath));
+            Assert.True(Directory.Exists(TempDirectoryPath));
+            Assert.NotEmpty(Directory.GetFiles(TempDirectoryPath));
             
             // Clean up
             File.Delete(imagePath);
-            Directory.Delete(DirectoryPath);
-            Assert.False(Directory.Exists(DirectoryPath));
+            Directory.Delete(TempDirectoryPath);
+            Assert.False(Directory.Exists(TempDirectoryPath));
         }
 
         public static IEnumerable<object[]> GetRandomFileNames()
