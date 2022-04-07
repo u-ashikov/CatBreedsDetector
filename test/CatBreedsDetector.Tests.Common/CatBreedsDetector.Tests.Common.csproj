@@ -10,8 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CatBreedsDetector.Classification\CatBreedsDetector.Classification.csproj" />
-    <ProjectReference Include="..\CatBreedsDetector.Services\CatBreedsDetector.Services.csproj" />
+    <ProjectReference Include="..\..\src\CatBreedsDetector.Classification\CatBreedsDetector.Classification.csproj" />
   </ItemGroup>
 
 </Project>
