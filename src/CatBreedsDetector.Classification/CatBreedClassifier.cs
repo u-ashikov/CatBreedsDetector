@@ -26,6 +26,7 @@
         /// <inheritdoc />
         public ImagePrediction ClassifySingleImage(string path)
         {
+            // TODO: This method needs refactoring. We should accept the prediction engine from outside.
             if (string.IsNullOrEmpty(path) || !File.Exists(path))
                 throw new ArgumentException(CommonConstants.Constants.Message.MissingOrInvalidFile);
 

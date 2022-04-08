@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Server.In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Services.Integration", "..\test\CatBreedsDetector.Services.Integration\CatBreedsDetector.Services.Integration.csproj", "{53DE73BD-484A-4D61-A71D-D21A5611A160}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Classification.Integration", "..\test\CatBreedsDetector.Classification.Integration\CatBreedsDetector.Classification.Integration.csproj", "{E0008B24-F0C1-4411-8CEF-CA80639736A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{53DE73BD-484A-4D61-A71D-D21A5611A160}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53DE73BD-484A-4D61-A71D-D21A5611A160}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53DE73BD-484A-4D61-A71D-D21A5611A160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0008B24-F0C1-4411-8CEF-CA80639736A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0008B24-F0C1-4411-8CEF-CA80639736A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0008B24-F0C1-4411-8CEF-CA80639736A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0008B24-F0C1-4411-8CEF-CA80639736A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{6788F79D-5131-4E0B-9270-FE07BACE86D7} = {DD83495D-7BC9-446B-8657-FA3F63DE475A}
 		{7781F08F-ACF0-4327-B33C-C6BB2C697AB4} = {DD83495D-7BC9-446B-8657-FA3F63DE475A}
 		{53DE73BD-484A-4D61-A71D-D21A5611A160} = {DD83495D-7BC9-446B-8657-FA3F63DE475A}
+		{E0008B24-F0C1-4411-8CEF-CA80639736A8} = {DD83495D-7BC9-446B-8657-FA3F63DE475A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2ECF3A1-9A31-4AAF-AC96-AE7BE5BDE69A}

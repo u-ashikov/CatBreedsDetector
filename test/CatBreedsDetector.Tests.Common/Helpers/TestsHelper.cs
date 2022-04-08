@@ -65,5 +65,18 @@
                 fileStream?.Dispose();
             }
         }
+
+        /// <summary>
+        /// Use this method to generate a string of whitespace characters.
+        /// </summary>
+        /// <param name="charactersCount">The count of whitespace characters to be generated.</param>
+        /// <returns>The generated string.</returns>
+        public static string GenerateWhiteSpaces(int charactersCount = 1)
+        {
+            if (charactersCount <= 0)
+                return new string(' ', 1);
+
+            return new string(' ', charactersCount);
+        }
     }
 }
