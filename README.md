@@ -1,3 +1,3 @@
 # CatBreedsDetector
 
-![example branch parameter](https://github.com/github/u-ashikov/CatBreedsDetector/actions/workflows/azure-master.yml/badge.svg?branch=master)
+[![Build Status](https://dev.azure.com/YASoftware/Cat%20breeds%20detector/_apis/build/status/u-ashikov.CatBreedsDetector?branchName=master)](https://dev.azure.com/YASoftware/Cat%20breeds%20detector/_build/latest?definitionId=6&branchName=master)
