@@ -1,4 +1,4 @@
-﻿namespace CatBreedsDetector.Models
+﻿namespace CatBreedsDetector.Models.ViewModels
 {
     /// <summary>
     /// A class representing a cat breed prediction result model.

@@ -1,4 +1,4 @@
-﻿namespace CatBreedsDetector.Common
+﻿namespace CatBreedsDetector.Common.Attributes
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -9,10 +9,10 @@
     /// <summary>
     /// A custom attribute that validates the allowed file extension.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
     public class CustomFileExtensionAttribute : ValidationAttribute
     {
-        private string extensions;
+        private string _extensions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomFileExtensionAttribute"/> class.
@@ -27,19 +27,17 @@
         /// </summary>
         public string Extensions
         {
-            get => string.IsNullOrEmpty(this.extensions) ? Constants.FileExtension.DefaultImageFileExtensions : this.extensions;
-            set => this.extensions = value;
+            get => string.IsNullOrEmpty(this._extensions) ? Constants.FileExtension.DefaultImageFileExtensions : this._extensions;
+            set => this._extensions = value;
         }
 
-        private string ExtensionsNormalized => this.extensions.Replace(Constants.StringSeparator.Space, string.Empty).ToUpperInvariant();
+        private string ExtensionsNormalized => this._extensions.Replace(Constants.StringSeparator.Space, string.Empty).ToUpperInvariant();
 
         /// <inheritdoc />
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (value == null)
-            {
                 return ValidationResult.Success;
-            }
 
             var fileExtension = Path.GetExtension(((IFormFile)value)?.FileName?.ToUpperInvariant());
 
@@ -49,9 +47,7 @@
                 .Contains(fileExtension);
 
             if (!isValid)
-            {
                 return new ValidationResult(Constants.Message.InvalidUploadedFileExtension);
-            }
 
             return ValidationResult.Success;
         }
