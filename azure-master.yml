@@ -41,5 +41,5 @@ steps:
   displayName: 'Classification Integration Tests'
   inputs:
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\test\CatBreedsDetector.Classification.Integration'
+    testAssemblyVer2: '**\CatBreedsDetector.Classification.Integration.dll'
     searchFolder: '$(System.DefaultWorkingDirectory)\test'
