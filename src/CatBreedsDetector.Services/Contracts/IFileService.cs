@@ -1,5 +1,6 @@
 ﻿namespace CatBreedsDetector.Services.Contracts
 {
+    using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
 
@@ -19,7 +20,8 @@
         /// </summary>
         /// <param name="imagePath">The path to the image.</param>
         /// <param name="imageFile">The image file that should be stored.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous state of the operation.</returns>
-        Task SaveImageToFileAsync(string imagePath, IFormFile imageFile);
+        Task SaveImageToFileAsync(string imagePath, IFormFile imageFile, CancellationToken cancellationToken);
     }
 }

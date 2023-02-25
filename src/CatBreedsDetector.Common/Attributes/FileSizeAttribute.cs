@@ -1,4 +1,4 @@
-﻿namespace CatBreedsDetector.Common
+﻿namespace CatBreedsDetector.Common.Attributes
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@
     /// <summary>
     /// A custom attribute that validates the allowed file size.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
     public class FileSizeAttribute : ValidationAttribute
     {
         /// <summary>
@@ -37,9 +37,7 @@
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (value == null)
-            {
                 return ValidationResult.Success;
-            }
 
             this.ValidateFileSizes();
 
