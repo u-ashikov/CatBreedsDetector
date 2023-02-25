@@ -3,8 +3,6 @@
 namespace CatBreedsDetector.Web.Controllers
 {
     using System;
-    using System.IO;
-    using System.Reflection;
     using System.Threading.Tasks;
     using CatBreedsDetector.Classification.Interfaces;
     using CatBreedsDetector.Common;
@@ -18,6 +16,8 @@ namespace CatBreedsDetector.Web.Controllers
     [Route("api/[controller]")]
     public class CatBreedsController : ControllerBase
     {
+        private const string DirectoryPath = "C:\\Temp\\TestFiles";
+
         private readonly ICatBreedClassifier _catBreedClassifier;
 
         private readonly IFileService _fileService;
@@ -31,8 +31,10 @@ namespace CatBreedsDetector.Web.Controllers
         [HttpPost(nameof(DetectAsync))]
         public async Task<IActionResult> DetectAsync([FromForm] CatBreedDetectInputModel model, CancellationToken cancellationToken)
         {
-            var buildDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var predictedImagesDirectoryPath = buildDir + $@"\{Constants.FilePath.PredictedImages}";
+            if (model is null || !this.ModelState.IsValid)
+                return this.BadRequest();
+
+            var predictedImagesDirectoryPath = DirectoryPath + $@"\{Constants.FilePath.PredictedImages}";
             var imagePath = predictedImagesDirectoryPath + $@"\{model.CatImage.FileName}";
 
             this._fileService.DeleteFilesInDirectory(predictedImagesDirectoryPath);

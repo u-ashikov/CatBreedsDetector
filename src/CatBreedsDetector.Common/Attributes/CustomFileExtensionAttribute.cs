@@ -39,7 +39,7 @@
             if (value == null)
                 return ValidationResult.Success;
 
-            var fileExtension = Path.GetExtension(((IFormFile)value).FileName.ToUpperInvariant());
+            var fileExtension = Path.GetExtension(((IFormFile)value)?.FileName?.ToUpperInvariant());
 
             var isValid = this.ExtensionsNormalized
                 .Split(new[] { Constants.StringSeparator.Comma }, StringSplitOptions.RemoveEmptyEntries)

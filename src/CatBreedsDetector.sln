@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Classification", "CatBreedsDetector.Classification\CatBreedsDetector.Classification.csproj", "{C7169B09-CACD-4897-981C-3CB0A7969A2D}"
 EndProject
@@ -20,6 +20,16 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Services", "CatBreedsDetector.Services\CatBreedsDetector.Services.csproj", "{BB4F571B-582B-4081-A969-7B8EE5F1A44A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatBreedsDetector.Server", "CatBreedsDetector.Server\CatBreedsDetector.Server.csproj", "{EBDD5977-A633-4569-AB23-22BF5A8D9597}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DD83495D-7BC9-446B-8657-FA3F63DE475A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Tests.Common", "..\test\CatBreedsDetector.Tests.Common\CatBreedsDetector.Tests.Common.csproj", "{6788F79D-5131-4E0B-9270-FE07BACE86D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Server.Integration", "..\test\CatBreedsDetector.Server.Integration\CatBreedsDetector.Server.Integration.csproj", "{7781F08F-ACF0-4327-B33C-C6BB2C697AB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Services.Integration", "..\test\CatBreedsDetector.Services.Integration\CatBreedsDetector.Services.Integration.csproj", "{53DE73BD-484A-4D61-A71D-D21A5611A160}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatBreedsDetector.Classification.Integration", "..\test\CatBreedsDetector.Classification.Integration\CatBreedsDetector.Classification.Integration.csproj", "{E0008B24-F0C1-4411-8CEF-CA80639736A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +61,31 @@ Global
 		{EBDD5977-A633-4569-AB23-22BF5A8D9597}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBDD5977-A633-4569-AB23-22BF5A8D9597}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBDD5977-A633-4569-AB23-22BF5A8D9597}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6788F79D-5131-4E0B-9270-FE07BACE86D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6788F79D-5131-4E0B-9270-FE07BACE86D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6788F79D-5131-4E0B-9270-FE07BACE86D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6788F79D-5131-4E0B-9270-FE07BACE86D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7781F08F-ACF0-4327-B33C-C6BB2C697AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7781F08F-ACF0-4327-B33C-C6BB2C697AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7781F08F-ACF0-4327-B33C-C6BB2C697AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7781F08F-ACF0-4327-B33C-C6BB2C697AB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53DE73BD-484A-4D61-A71D-D21A5611A160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53DE73BD-484A-4D61-A71D-D21A5611A160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53DE73BD-484A-4D61-A71D-D21A5611A160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53DE73BD-484A-4D61-A71D-D21A5611A160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0008B24-F0C1-4411-8CEF-CA80639736A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0008B24-F0C1-4411-8CEF-CA80639736A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0008B24-F0C1-4411-8CEF-CA80639736A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0008B24-F0C1-4411-8CEF-CA80639736A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6788F79D-5131-4E0B-9270-FE07BACE86D7} = {DD83495D-7BC9-446B-8657-FA3F63DE475A}
+		{7781F08F-ACF0-4327-B33C-C6BB2C697AB4} = {DD83495D-7BC9-446B-8657-FA3F63DE475A}
+		{53DE73BD-484A-4D61-A71D-D21A5611A160} = {DD83495D-7BC9-446B-8657-FA3F63DE475A}
+		{E0008B24-F0C1-4411-8CEF-CA80639736A8} = {DD83495D-7BC9-446B-8657-FA3F63DE475A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2ECF3A1-9A31-4AAF-AC96-AE7BE5BDE69A}
