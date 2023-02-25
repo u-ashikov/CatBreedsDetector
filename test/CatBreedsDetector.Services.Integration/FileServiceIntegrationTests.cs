@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.IO;
+    using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Xunit;
@@ -21,7 +22,7 @@
             TestsHelper.CreateFileInDirectory(TempDirectoryPath, fileName);
 
             // Act
-            this._fileService.DeleteFilesInDirectory(randomFileName);
+            this.FileService.DeleteFilesInDirectory(randomFileName);
 
             // Assert
             var existingFiles = Directory.GetFiles(TempDirectoryPath);
@@ -46,7 +47,7 @@
             }
 
             // Act
-            this._fileService.DeleteFilesInDirectory(TempDirectoryPath);
+            this.FileService.DeleteFilesInDirectory(TempDirectoryPath);
 
             // Assert
             var existingFiles = Directory.GetFiles(TempDirectoryPath);
@@ -62,7 +63,7 @@
         public async Task SaveImageToFileAsyncShouldCreateNothingWithInvalidParameters(string imagePath, IFormFile imageFile)
         {
             // Arrange & Act
-            await this._fileService.SaveImageToFileAsync(imagePath, imageFile);
+            await this.FileService.SaveImageToFileAsync(imagePath, imageFile, CancellationToken.None);
 
             // Assert
             Assert.False(Directory.Exists(imagePath));
@@ -78,7 +79,7 @@
             var imagePath = $"{TempDirectoryPath}\\{TestsHelper.GenerateRandomString()}";
             
             // Act
-            await this._fileService.SaveImageToFileAsync(imagePath, imageFile);
+            await this.FileService.SaveImageToFileAsync(imagePath, imageFile, CancellationToken.None);
 
             // Assert
             Assert.True(Directory.Exists(TempDirectoryPath));
@@ -92,9 +93,9 @@
 
         public static IEnumerable<object[]> GetRandomFileNames()
         {
-            yield return new[] { (string)null };
-            yield return new[] { string.Empty };
-            yield return new[] { TestsHelper.GenerateRandomString() };
+            yield return new object[] { null };
+            yield return new object[] { string.Empty };
+            yield return new object[] { TestsHelper.GenerateRandomString() };
         }
         
         public static IEnumerable<object[]> GetInvalidImagesToSave()

@@ -1,12 +1,13 @@
 ﻿namespace CatBreedsDetector.Server.Integration.Controllers
 {
     using System.IO;
-    using CatBreedsDetector.Models;
+    using System.Threading;
     using CatBreedsDetector.Tests.Common.Helpers;
     using CatBreedsDetector.Tests.Common.Mocks;
     using System.Collections.Generic;
-    using CatBreedsDetector.Models.Models;
     using CatBreedsDetector.Web.Controllers;
+    using CatBreedsDetector.Models.InputModels;
+    using CatBreedsDetector.Models.ViewModels;
     using MyTested.AspNetCore.Mvc;
     using MyTested.AspNetCore.Mvc.Builders.Contracts.Controllers;
     using Xunit;
@@ -20,8 +21,8 @@
         public void DetectAsyncWithNullModelShouldReturnBadRequest(CatBreedDetectInputModel inputModel)
         {
             // Arrange & Act & Assert
-            this.PrepareTestController()
-                .Calling(c => c.DetectAsync(inputModel))
+            PrepareTestController()
+                .Calling(c => c.DetectAsync(inputModel, CancellationToken.None))
                 .ShouldReturn()
                 .BadRequest();
         }
@@ -41,8 +42,8 @@
             var inputModel = new CatBreedDetectInputModel() { CatImage = mockedFormFile.Object };
             
             // Act & Assert.
-            this.PrepareTestController()
-                .Calling(c => c.DetectAsync(inputModel))
+            PrepareTestController()
+                .Calling(c => c.DetectAsync(inputModel, CancellationToken.None))
                 .ShouldReturn()
                 .Ok(result => result.WithModelOfType<CatBreedPredictionResultModel>());
             
@@ -54,12 +55,12 @@
 
         public static IEnumerable<object[]> PrepareInvalidCatBreedDetectionInputModels()
         {
-            yield return new[] {(CatBreedDetectInputModel)null};
-            yield return new[] { new CatBreedDetectInputModel() };
-            yield return new[] {new CatBreedDetectInputModel() {CatImage = FormFileMock.New.Object }};
+            yield return new object[] { null };
+            yield return new object[] { new CatBreedDetectInputModel() };
+            yield return new object[] { new CatBreedDetectInputModel() {CatImage = FormFileMock.New.Object }};
         }
 
-        private IControllerBuilder<CatBreedsController> PrepareTestController()
+        private static IControllerBuilder<CatBreedsController> PrepareTestController()
             => MyMvc.Controller<CatBreedsController>();
     }
 }

@@ -5,11 +5,11 @@
 
     public abstract class BaseTest
     {
-        protected readonly IFileService _fileService;
+        protected readonly IFileService FileService;
 
         protected BaseTest()
         {
-            this._fileService = new FileService();
+            this.FileService = new FileService();
         }
     }
 }

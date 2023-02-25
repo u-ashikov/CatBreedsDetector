@@ -7,10 +7,10 @@
     public class CatBreedClassifierMock : ICatBreedClassifier
     {
         /// <inheritdoc />
-        public ImagePrediction ClassifySingleImage(string path) => new ImagePrediction()
+        public ImagePrediction ClassifySingleImage(string path) => new()
         {
             PredictedLabelValue = TestsHelper.GenerateRandomString(),
-            Score = new float[] { (float)TestsHelper.GenerateRandomProbability()}
+            Score = new [] { (float)TestsHelper.GenerateRandomProbability()}
         };
     }
 }

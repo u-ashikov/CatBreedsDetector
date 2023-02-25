@@ -5,6 +5,6 @@
     
     public class FormFileMock
     {
-        public static Mock<IFormFile> New => new Mock<IFormFile>();
+        public static Mock<IFormFile> New => new();
     }
 }

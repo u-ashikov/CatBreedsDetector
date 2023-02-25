@@ -5,8 +5,6 @@ using CatBreedsDetector.Tests.Common.Helpers;
 
 public class CatBreedClassifierTests
 {
-    private const string TempDirectoryPath = "C:\\Temp\\TestFiles";
-    
     [Theory]
     [MemberData(nameof(GetInvalidImageClassificationParameters))]
     public void ClassifySingleImageShouldThrowExceptionWithInvalidArguments(string path)
@@ -20,9 +18,9 @@ public class CatBreedClassifierTests
 
     public static IEnumerable<object[]> GetInvalidImageClassificationParameters()
     {
-        yield return new[] { (string)null };
-        yield return new[] { string.Empty };
-        yield return new[] {TestsHelper.GenerateWhiteSpaces()};
-        yield return new[] {TestsHelper.GenerateRandomString()};
+        yield return new object[] { null };
+        yield return new object[] { string.Empty };
+        yield return new object[] {TestsHelper.GenerateWhiteSpaces()};
+        yield return new object[] {TestsHelper.GenerateRandomString()};
     }
 }
