@@ -1,4 +1,6 @@
-﻿namespace CatBreedsDetector.Web.Controllers
+﻿using System.Threading;
+
+namespace CatBreedsDetector.Web.Controllers
 {
     using System;
     using System.IO;
@@ -7,6 +9,8 @@
     using CatBreedsDetector.Classification.Interfaces;
     using CatBreedsDetector.Common;
     using CatBreedsDetector.Models;
+    using CatBreedsDetector.Models.InputModels;
+    using CatBreedsDetector.Models.ViewModels;
     using CatBreedsDetector.Services.Contracts;
     using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +29,7 @@
         }
 
         [HttpPost(nameof(DetectAsync))]
-        public async Task<IActionResult> DetectAsync([FromForm]CatBreedDetectInputModel model)
+        public async Task<IActionResult> DetectAsync([FromForm] CatBreedDetectInputModel model, CancellationToken cancellationToken)
         {
             var buildDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var predictedImagesDirectoryPath = buildDir + $@"\{Constants.FilePath.PredictedImages}";
@@ -33,7 +37,7 @@
 
             this._fileService.DeleteFilesInDirectory(predictedImagesDirectoryPath);
 
-            await this._fileService.SaveImageToFileAsync(imagePath, model.CatImage);
+            await this._fileService.SaveImageToFileAsync(imagePath, model.CatImage, cancellationToken);
 
             var prediction = this._catBreedClassifier.ClassifySingleImage(imagePath);
 

@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Linq;
     using CatBreedsDetector.Classification.Common;
     using CatBreedsDetector.Classification.Interfaces;
     using CatBreedsDetector.Classification.Models;
@@ -14,14 +13,14 @@
     /// </summary>
     public class CatBreedClassifier : ICatBreedClassifier
     {
-        private readonly MLContext mlContext;
+        private readonly MLContext _mlContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CatBreedClassifier"/> class.
         /// </summary>
         public CatBreedClassifier()
         {
-            this.mlContext = new MLContext();
+            this._mlContext = new MLContext();
         }
 
         /// <inheritdoc />
@@ -37,7 +36,7 @@
 
             var model = this.GenerateModel();
 
-            var predictor = this.mlContext.Model.CreatePredictionEngine<ImageData, ImagePrediction>(model);
+            var predictor = this._mlContext.Model.CreatePredictionEngine<ImageData, ImagePrediction>(model);
 
             return predictor.Predict(imageData);
         }
@@ -47,43 +46,43 @@
             if (File.Exists(Constants.SavedModelFileName))
             {
                 // TODO: Should be fixed to check whether the model is loaded.
-                var trainedModel = this.mlContext.Model.Load(Constants.SavedModelFileName, out var modelSchema);
+                var trainedModel = this._mlContext.Model.Load(Constants.SavedModelFileName, out var modelSchema);
 
                 return trainedModel;
             }
 
-            var pipeline = this.mlContext.Transforms.LoadImages(
+            var pipeline = this._mlContext.Transforms.LoadImages(
                     outputColumnName: "input",
                     imageFolder: Constants.ImagesFolder,
                     inputColumnName: nameof(ImageData.ImagePath))
-                .Append(this.mlContext.Transforms.ResizeImages(
+                .Append(this._mlContext.Transforms.ResizeImages(
                     outputColumnName: "input",
                     imageWidth: InceptionSettings.ImageWidth,
                     imageHeight: InceptionSettings.ImageHeight,
                     inputColumnName: "input"))
-                .Append(this.mlContext.Transforms.ExtractPixels(
+                .Append(this._mlContext.Transforms.ExtractPixels(
                     outputColumnName: "input",
                     interleavePixelColors: InceptionSettings.ChannelsLast,
                     offsetImage: InceptionSettings.Mean))
-                .Append(this.mlContext.Model.LoadTensorFlowModel(Constants.InceptionTensorFlowModel)
+                .Append(this._mlContext.Model.LoadTensorFlowModel(Constants.InceptionTensorFlowModel)
                     .ScoreTensorFlowModel(
                     outputColumnNames: new[] { "softmax2_pre_activation" },
                     inputColumnNames: new[] { "input" },
                     addBatchDimensionInput: true))
-                .Append(this.mlContext.Transforms.Conversion.MapValueToKey(
+                .Append(this._mlContext.Transforms.Conversion.MapValueToKey(
                     outputColumnName: "LabelKey",
                     inputColumnName: "Label"))
-                .Append(this.mlContext.MulticlassClassification.Trainers.LbfgsMaximumEntropy(
+                .Append(this._mlContext.MulticlassClassification.Trainers.LbfgsMaximumEntropy(
                     labelColumnName: "LabelKey",
                     featureColumnName: "softmax2_pre_activation"))
-                .Append(this.mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabelValue", "PredictedLabel"))
-                .AppendCacheCheckpoint(this.mlContext);
+                .Append(this._mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabelValue", "PredictedLabel"))
+                .AppendCacheCheckpoint(this._mlContext);
 
-            var trainingData = this.mlContext.Data.LoadFromTextFile<ImageData>(path: Constants.TrainTagsTsv);
+            var trainingData = this._mlContext.Data.LoadFromTextFile<ImageData>(path: Constants.TrainTagsTsv);
 
             var model = pipeline.Fit(trainingData);
 
-            this.mlContext.Model.Save(model, trainingData.Schema, Constants.SavedModelFileName);
+            this._mlContext.Model.Save(model, trainingData.Schema, Constants.SavedModelFileName);
 
             return model;
         }

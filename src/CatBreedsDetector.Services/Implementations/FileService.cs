@@ -1,12 +1,13 @@
 ﻿namespace CatBreedsDetector.Services.Implementations
 {
     using System.IO;
+    using System.Threading;
     using System.Threading.Tasks;
     using CatBreedsDetector.Services.Contracts;
     using Microsoft.AspNetCore.Http;
 
     /// <summary>
-    /// A custom implementation of the <see cref="IFileHelper"/> interface.
+    /// A custom implementation of the <see cref="IFileService"/> interface.
     /// </summary>
     public class FileService : IFileService
     {
@@ -23,13 +24,13 @@
         }
 
         /// <inheritdoc />
-        public async Task SaveImageToFileAsync(string imagePath, IFormFile imageFile)
+        public async Task SaveImageToFileAsync(string imagePath, IFormFile imageFile, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(imagePath) || imageFile == null)
                 return;
 
             using var stream = File.Create(imagePath);
-            await imageFile.CopyToAsync(stream);
+            await imageFile.CopyToAsync(stream, cancellationToken);
         }
     }
 }
