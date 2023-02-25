@@ -16,6 +16,8 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+  displayName: 'Nuget tool installer'
+
 - task: VisualStudioTestPlatformInstaller@1
   displayName: 'Install VS Test Platform'
   inputs:
@@ -34,9 +36,10 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
 - task: VSTest@2
   displayName: 'Classification Integration Tests'
   inputs:
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\test\CatBreedsDetector.Classification.Integration.csproj'
+    testAssemblyVer2: '**\test\CatBreedsDetector.Classification.Integration'
     searchFolder: '$(System.DefaultWorkingDirectory)\test'
