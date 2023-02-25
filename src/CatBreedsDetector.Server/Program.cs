@@ -1,29 +1,10 @@
-namespace CatBreedsDetector.Web
-{
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Hosting;
-    using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Logging.Configuration;
-    using NLog.Extensions.Logging;
+using CatBreedsDetector.Web;
+using Microsoft.AspNetCore.Builder;
 
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+var builder = WebApplication.CreateBuilder(args);
+var startUp = new Startup(builder.Configuration);
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureLogging((hostingContext, builder) =>
-                {
-                    builder.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-                    builder.AddDebug();
-                    builder.AddNLog();
-                })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
+startUp.ConfigureServices(builder.Services);
+
+var app = builder.Build();
+startUp.Configure(app, builder.Environment);
