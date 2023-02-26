@@ -3,9 +3,16 @@
     using System.IO;
     using System;
     using System.Linq;
+    using System.Reflection;
+    using Xunit;
 
     public static class TestsHelper
     {
+        /// <summary>
+        /// Gets the path to the current executing assembly.
+        /// </summary>
+        public static string CurrentExecutingAssemblyLocation => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        
         /// <summary>
         /// Use this method to generate a random string.
         /// </summary>
@@ -64,6 +71,22 @@
             {
                 fileStream?.Dispose();
             }
+        }
+
+        /// <summary>
+        /// Use this method to create a test directory with a specified name within the current executing assembly location.
+        /// </summary>
+        /// <param name="directoryName">The name of the directory that should be created.</param>
+        /// <returns>The full path to the currently created directory.</returns>
+        public static string CreateTestDirectory(string directoryName)
+        {
+            Assert.NotNull(directoryName);
+            var directory = Path.Combine(CurrentExecutingAssemblyLocation, directoryName);
+            
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+
+            return directory;
         }
 
         /// <summary>
