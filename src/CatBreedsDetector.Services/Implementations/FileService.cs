@@ -14,13 +14,11 @@
         /// <inheritdoc />
         public void DeleteFilesInDirectory(string directoryPath)
         {
-            if (Directory.Exists(directoryPath))
-            {
-                var predictedDirectory = new DirectoryInfo(directoryPath);
+            if (!Directory.Exists(directoryPath)) return;
+            var predictedDirectory = new DirectoryInfo(directoryPath);
 
-                foreach (var file in predictedDirectory.GetFiles())
-                    file.Delete();
-            }
+            foreach (var file in predictedDirectory.GetFiles())
+                file.Delete();
         }
 
         /// <inheritdoc />
