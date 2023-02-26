@@ -22,7 +22,7 @@ steps:
   displayName: 'Install VS Test Platform'
   inputs:
     packageFeedSelector: 'nugetOrg'
-    versionSelector: 'latestPreRelease'
+    versionSelector: 'latestStable'
 
 - task: NuGetCommand@2
   displayName: 'Restore solution'
@@ -43,6 +43,5 @@ steps:
     testSelector: 'testAssemblies'
     testAssemblyVer2: |
       **\CatBreedsDetector.Classification.Integration.dll
-      !**\bin\**
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)\test'
