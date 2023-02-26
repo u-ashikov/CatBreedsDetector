@@ -16,12 +16,21 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+  displayName: 'Nuget tool installer'
+
+- task: VisualStudioTestPlatformInstaller@1
+  displayName: 'Install VS Test Platform'
+  inputs:
+    packageFeedSelector: 'nugetOrg'
+    versionSelector: 'latestStable'
 
 - task: NuGetCommand@2
+  displayName: 'Restore solution'
   inputs:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
+  displayName: 'Build solution'
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
@@ -29,6 +38,10 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
+  displayName: 'Classification Integration Tests'
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\CatBreedsDetector.Classification.Integration.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)\test'
