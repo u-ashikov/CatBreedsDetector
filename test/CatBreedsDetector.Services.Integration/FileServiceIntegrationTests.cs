@@ -6,19 +6,18 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Xunit;
+    using CatBreedsDetector.Tests.Common;
     using CatBreedsDetector.Tests.Common.Mocks;
     using CatBreedsDetector.Tests.Common.Helpers;
 
     public class FileServiceIntegrationTests : BaseTest
     {
-        private const string TestFilesDirectoryName = "TestFiles";
-        
         [Theory]
         [MemberData(nameof(GetRandomDirectoryNames))]
         public void DeleteFilesInDirectory_ShouldDeleteNothingWithNonExistingDirectory(string randomDirectoryName)
         {
             // Arrange
-            var testFilesDirectory = TestsHelper.CreateTestDirectory(TestFilesDirectoryName);
+            var testFilesDirectory = TestsHelper.CreateTestDirectory(TestsConstants.TestFilesDirectoryName);
             var fileName = $"{testFilesDirectory}\\{TestsHelper.GenerateRandomString()}";
             TestsHelper.CreateFileInDirectory(testFilesDirectory, fileName);
 
@@ -39,7 +38,7 @@
         public void DeleteFilesInDirectory_ShouldDeleteTheFilesSuccessfully()
         {
             // Arrange
-            var testFilesDirectory = TestsHelper.CreateTestDirectory(TestFilesDirectoryName);
+            var testFilesDirectory = TestsHelper.CreateTestDirectory(TestsConstants.TestFilesDirectoryName);
             var randomFilesCount = TestsHelper.GenerateRandomInteger();
 
             for (var i = 0; i <= randomFilesCount; i++)
@@ -76,7 +75,7 @@
         {
             // Arrange
             var imageFile = FormFileMock.New.Object;
-            var testFilesDirectory = TestsHelper.CreateTestDirectory(TestFilesDirectoryName);
+            var testFilesDirectory = TestsHelper.CreateTestDirectory(TestsConstants.TestFilesDirectoryName);
             
             var imagePath = $"{testFilesDirectory}\\{TestsHelper.GenerateRandomString()}";
             
