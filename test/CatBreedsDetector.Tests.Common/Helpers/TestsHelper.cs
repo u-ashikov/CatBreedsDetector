@@ -4,6 +4,8 @@
     using System;
     using System.Linq;
     using System.Reflection;
+    using System.Net.Http;
+    using System.Text;
     using Xunit;
 
     public static class TestsHelper
@@ -87,6 +89,25 @@
                 Directory.CreateDirectory(directory);
 
             return directory;
+        }
+
+        /// <summary>
+        /// Use this method to create a test <see cref="MultipartFormDataContent"/>.
+        /// </summary>
+        /// <param name="fileName">The name of the test file.</param>
+        /// <param name="contentName">The name of the http content to be added.</param>
+        /// <param name="content">The actual file content to be used.</param>
+        /// <returns>The generated <see cref="MultipartFormDataContent"/> instance.</returns>
+        public static MultipartFormDataContent CreateFormDataFileContent(string fileName, string contentName, string content)
+        {
+            Assert.NotNull(fileName);
+            Assert.NotNull(contentName);
+            Assert.NotNull(content);
+            
+            var formData = new MultipartFormDataContent();
+            formData.Add(new ByteArrayContent(Encoding.UTF8.GetBytes(content)), contentName, fileName);
+
+            return formData;
         }
 
         /// <summary>
