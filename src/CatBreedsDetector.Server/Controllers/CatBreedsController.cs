@@ -26,7 +26,7 @@
             this._fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
         }
 
-        [HttpPost(nameof(DetectAsync))]
+        [HttpPost("[action]")]
         public async Task<IActionResult> DetectAsync([FromForm] CatBreedDetectInputModel model, CancellationToken cancellationToken)
         {
             if (model is null || !this.ModelState.IsValid)
@@ -36,12 +36,19 @@
             var predictedImagesDirectoryPath = Path.Combine(rootPredictedImagesDirectory, Constants.FilePath.PredictedImages);
             var imagePath = Path.Combine(predictedImagesDirectoryPath, model.CatImage.FileName);
 
-            this._fileService.DeleteFilesInDirectory(predictedImagesDirectoryPath);
+            var deleteFilesInDirectory = this._fileService.DeleteFilesInDirectory(predictedImagesDirectoryPath);
+            if (!deleteFilesInDirectory.IsSuccessful)
+                return this.BadRequest(Constants.Message.UnsuccessfulOperation);
 
-            await this._fileService.SaveImageToFileAsync(imagePath, model.CatImage, cancellationToken);
+            var saveImageToFile = await this._fileService.SaveImageToFileAsync(imagePath, model.CatImage, cancellationToken);
+            if (!saveImageToFile.IsSuccessful)
+                return this.BadRequest(saveImageToFile.Errors);
 
-            var prediction = this._catBreedClassifier.ClassifySingleImage(imagePath);
+            var classifyImage = this._catBreedClassifier.ClassifySingleImage(imagePath);
+            if (!classifyImage.IsSuccessful)
+                return this.BadRequest(classifyImage.Errors);
 
+            var prediction = classifyImage.Outcome;
             var predictionResult = new CatBreedPredictionResultModel(prediction.PredictedLabelValue, prediction.PredictionProbability);
 
             return this.Ok(predictionResult);

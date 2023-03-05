@@ -5,6 +5,8 @@
     using System.Threading.Tasks;
     using Contracts;
     using Microsoft.AspNetCore.Http;
+    using CatBreedsDetector.Common.Execution;
+    using Constants = CatBreedsDetector.Common.Constants;
 
     /// <summary>
     /// A custom implementation of the <see cref="IFileService"/> interface.
@@ -12,23 +14,32 @@
     public class FileService : IFileService
     {
         /// <inheritdoc />
-        public void DeleteFilesInDirectory(string directoryPath)
+        public ExecutionResult DeleteFilesInDirectory(string directoryPath)
         {
-            if (!Directory.Exists(directoryPath)) return;
+            if (!Directory.Exists(directoryPath))
+                return ExecutionResult.Failure(Constants.Message.DirectoryDoesNotExist);
+            
             var predictedDirectory = new DirectoryInfo(directoryPath);
 
             foreach (var file in predictedDirectory.GetFiles())
                 file.Delete();
+
+            return ExecutionResult.Success();
         }
 
         /// <inheritdoc />
-        public async Task SaveImageToFileAsync(string imagePath, IFormFile imageFile, CancellationToken cancellationToken)
+        public async Task<ExecutionResult> SaveImageToFileAsync(string imagePath, IFormFile imageFile, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(imagePath) || imageFile == null)
-                return;
+            if (string.IsNullOrEmpty(imagePath))
+                return ExecutionResult.Failure(Constants.Message.InvalidImagePath);
+            
+            if (imageFile is null)
+                return ExecutionResult.Failure(Constants.Message.InvalidImageFile);
 
-            using var stream = File.Create(imagePath);
+            await using var stream = File.Create(imagePath);
             await imageFile.CopyToAsync(stream, cancellationToken);
+
+            return ExecutionResult.Success();
         }
     }
 }

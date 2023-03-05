@@ -9,9 +9,9 @@
     public class ImagePrediction : ImageData
     {
         /// <summary>
-        /// Gets or sets the score of the prediction as a floating point number.
+        /// Gets the score of the prediction as a floating point number.
         /// </summary>
-        public float[] Score { get; set; }
+        public float[] Score { get; init; }
 
         /// <summary>
         /// Gets or sets a predicted label value.
