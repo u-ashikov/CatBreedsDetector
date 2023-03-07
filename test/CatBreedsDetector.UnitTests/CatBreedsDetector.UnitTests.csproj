@@ -20,6 +20,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\CatBreedsDetector.Common\CatBreedsDetector.Common.csproj" />
+      <ProjectReference Include="..\CatBreedsDetector.Tests.Common\CatBreedsDetector.Tests.Common.csproj" />
     </ItemGroup>
 
 </Project>
