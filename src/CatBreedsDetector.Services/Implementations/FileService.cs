@@ -17,7 +17,7 @@
         public ExecutionResult DeleteFilesInDirectory(string directoryPath)
         {
             if (!Directory.Exists(directoryPath))
-                return ExecutionResult.Failure(Constants.Message.DirectoryDoesNotExist);
+                return ExecutionResult.Fail(Constants.Message.DirectoryDoesNotExist);
             
             var predictedDirectory = new DirectoryInfo(directoryPath);
 
@@ -31,10 +31,10 @@
         public async Task<ExecutionResult> SaveImageToFileAsync(string imagePath, IFormFile imageFile, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(imagePath))
-                return ExecutionResult.Failure(Constants.Message.InvalidImagePath);
+                return ExecutionResult.Fail(Constants.Message.InvalidImagePath);
             
             if (imageFile is null)
-                return ExecutionResult.Failure(Constants.Message.InvalidImageFile);
+                return ExecutionResult.Fail(Constants.Message.InvalidImageFile);
 
             await using var stream = File.Create(imagePath);
             await imageFile.CopyToAsync(stream, cancellationToken);

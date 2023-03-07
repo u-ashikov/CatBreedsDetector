@@ -23,6 +23,8 @@
             public const string InvalidImageFile = "The provided image file is invalid.";
 
             public const string UnsuccessfulOperation = "The operation was not successful. Please, try again or reach out to your administrator.";
+
+            public const string ErrorsCollectionIsNotValid = "The provided errors collection is not a valid one.";
         }
 
         public class FilePath

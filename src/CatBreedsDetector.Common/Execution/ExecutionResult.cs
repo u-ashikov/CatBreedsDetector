@@ -2,6 +2,7 @@ namespace CatBreedsDetector.Common.Execution
 {
     using System;
     using System.Collections.Generic;
+    using CatBreedsDetector.Common.Extensions;
 
     /// <summary>
     /// A class representing the result of an executed operation.
@@ -32,20 +33,30 @@ namespace CatBreedsDetector.Common.Execution
         /// Use this method to generate a success execution result.
         /// </summary>
         /// <returns>A new instance of execution result with success state.</returns>
-        public static ExecutionResult Success() => new();
+        public static ExecutionResult Success() => new ();
 
         /// <summary>
         /// Use this method to generate an instance of the <see cref="ExecutionResult"/> with unsuccessful state.
         /// </summary>
         /// <param name="errors">A collection of error messages that should be appended to the <see cref="ExecutionResult"/>.</param>
         /// <returns>An instance of the <see cref="ExecutionResult"/>.</returns>
-        public static ExecutionResult Failure(params string[] errors)
+        public static ExecutionResult Fail(string[] errors)
         {
+            if (errors.IsNullOrEmpty())
+                throw new InvalidOperationException(Constants.Message.ErrorsCollectionIsNotValid);
+
             var executionResult = new ExecutionResult();
             executionResult.AppendErrors(errors);
 
             return executionResult;
         }
+
+        /// <summary>
+        /// Use this method to generate an instance of the <see cref="ExecutionResult"/> with unsuccessful state.
+        /// </summary>
+        /// <param name="error">The error message that should be appended to the <see cref="ExecutionResult"/>.</param>
+        /// <returns>An instance of the <see cref="ExecutionResult"/>.</returns>
+        public static ExecutionResult Fail(string error) => Fail(error.AsArray());
 
         /// <summary>
         /// Use this method to append error messages to the error's collection.
@@ -55,8 +66,8 @@ namespace CatBreedsDetector.Common.Execution
         {
             foreach (var error in errors)
             {
-                if (string.IsNullOrEmpty(error))
-                    ArgumentNullException.ThrowIfNull(error);
+                if (string.IsNullOrWhiteSpace(error))
+                    throw new InvalidOperationException(Constants.Message.ErrorsCollectionIsNotValid);
 
                 this._errors.Add(error);
             }
@@ -97,13 +108,23 @@ namespace CatBreedsDetector.Common.Execution
         /// </summary>
         /// <param name="errors">A collection of error messages that should be appended to the <see cref="ExecutionResult{T}"/>.</param>
         /// <returns>An instance of the <see cref="ExecutionResult{T}"/>.</returns>
-        public new static ExecutionResult<T> Failure(params string[] errors)
+        public new static ExecutionResult<T> Fail(string[] errors)
         {
+            if (errors.IsNullOrEmpty())
+                throw new InvalidOperationException(Constants.Message.ErrorsCollectionIsNotValid);
+
             var executionResult = new ExecutionResult<T>();
             executionResult.AppendErrors(errors);
 
             return executionResult;
         }
+
+        /// <summary>
+        /// Use this method to generate an instance of the <see cref="ExecutionResult{T}"/> with unsuccessful state.
+        /// </summary>
+        /// <param name="error">The error message that should be appended to the <see cref="ExecutionResult{T}"/>.</param>
+        /// <returns>An instance of the <see cref="ExecutionResult"/>.</returns>
+        public new static ExecutionResult<T> Fail(string error) => Fail(error.AsArray());
 
         /// <summary>
         /// Use this method to generate an instance of the <see cref="ExecutionResult{T}"/> with outcome data within it.
