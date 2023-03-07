@@ -1,8 +1,8 @@
-namespace CatBreedsDetector.UnitTests.ExecutionResult;
+namespace CatBreedsDetector.UnitTests;
 
-using Xunit;
+using CatBreedsDetector.Common.Execution;
 using CatBreedsDetector.Tests.Common.Helpers;
-using ExecutionResultTypes = CatBreedsDetector.Common.Execution;
+using Xunit;
 
 public class ExecutionResultTests
 {
@@ -11,7 +11,7 @@ public class ExecutionResultTests
     public void Fail_ShouldThrowExceptionWithInvalidErrors(IEnumerable<string> errors)
     {
         // Arrange & Act & Assert
-        Assert.Throws<InvalidOperationException>(() => ExecutionResultTypes.ExecutionResult.Fail(errors.ToArray()));
+        Assert.Throws<InvalidOperationException>(() => ExecutionResult.Fail(errors.ToArray()));
     }
     
     [Fact]
@@ -19,7 +19,7 @@ public class ExecutionResultTests
     {
         // Arrange & Act
         var randomErrorMessages = TestsHelper.GetRandomCountOf(() => TestsHelper.GenerateRandomString()).ToArray();
-        var executionResult = ExecutionResultTypes.ExecutionResult.Fail(randomErrorMessages);
+        var executionResult = ExecutionResult.Fail(randomErrorMessages);
         
         // Assert
         Assert.NotNull(executionResult);
@@ -32,7 +32,7 @@ public class ExecutionResultTests
     public void Success_ShouldCreateNewInstanceWithoutErrorsAndWithSuccessState()
     {
         // Arrange & Act
-        var executionResult = ExecutionResultTypes.ExecutionResult.Success();
+        var executionResult = ExecutionResult.Success();
         
         // Assert
         Assert.NotNull(executionResult);
@@ -45,7 +45,7 @@ public class ExecutionResultTests
     public void FailWithOutcome_ShouldThrowExceptionWithInvalidErrors(IEnumerable<string> errors)
     {
         // Arrange & Act & Assert
-        Assert.Throws<InvalidOperationException>(() => ExecutionResultTypes.ExecutionResult<string>.Fail(errors.ToArray()));
+        Assert.Throws<InvalidOperationException>(() => ExecutionResult<string>.Fail(errors.ToArray()));
     }
     
     [Fact]
@@ -53,7 +53,7 @@ public class ExecutionResultTests
     {
         // Arrange & Act
         var randomErrorMessages = TestsHelper.GetRandomCountOf(() => TestsHelper.GenerateRandomString()).ToArray();
-        var executionResult = ExecutionResultTypes.ExecutionResult<string>.Fail(randomErrorMessages);
+        var executionResult = ExecutionResult<string>.Fail(randomErrorMessages);
         
         // Assert
         Assert.NotNull(executionResult);
@@ -67,7 +67,7 @@ public class ExecutionResultTests
     public void SuccessWith_ShouldThrowArgumentNullExceptionWithInvalidOutcome()
     {
         // Arrange & Act & Assert
-        Assert.Throws<ArgumentNullException>(() => ExecutionResultTypes.ExecutionResult<DummyResult>.SuccessWith(null!));
+        Assert.Throws<ArgumentNullException>(() => ExecutionResult<DummyResult>.SuccessWith(null!));
     }
     
     [Fact]
@@ -75,7 +75,7 @@ public class ExecutionResultTests
     {
         // Arrange & Act
         var dummyResult = new DummyResult(TestsHelper.GenerateRandomString(), TestsHelper.GenerateRandomString());
-        var executionResult = ExecutionResultTypes.ExecutionResult<DummyResult>.SuccessWith(dummyResult);
+        var executionResult = ExecutionResult<DummyResult>.SuccessWith(dummyResult);
 
         // Assert
         Assert.NotNull(executionResult);
