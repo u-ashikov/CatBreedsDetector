@@ -4,14 +4,14 @@
     using System.Reflection;
 
     /// <summary>
-    /// A class containing common constants.
+    /// A class containing common constants for the application.
     /// </summary>
     public class Constants
     {
         /// <summary>
-        /// Gets the value of the assets path.
+        /// Gets the name of the saved trained model as a zip archive.
         /// </summary>
-        public static readonly string AssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets");
+        public const string SavedModelFileName = "model.zip";
 
         /// <summary>
         /// Gets the images folder path.
@@ -29,8 +29,8 @@
         public static readonly string InceptionTensorFlowModel = Path.Combine(AssetsPath, "inception", "tensorflow_inception_graph.pb");
 
         /// <summary>
-        /// Gets the name of the saved trained model as a zip archive.
+        /// Gets the value of the assets path.
         /// </summary>
-        public static readonly string SavedModelFileName = "model.zip";
+        private static readonly string AssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets");
     }
 }

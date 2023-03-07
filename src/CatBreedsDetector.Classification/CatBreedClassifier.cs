@@ -5,6 +5,7 @@
     using CatBreedsDetector.Classification.Common;
     using CatBreedsDetector.Classification.Interfaces;
     using CatBreedsDetector.Classification.Models;
+    using CatBreedsDetector.Common.Execution;
     using Microsoft.ML;
     using CommonConstants = CatBreedsDetector.Common;
 
@@ -24,11 +25,11 @@
         }
 
         /// <inheritdoc />
-        public ImagePrediction ClassifySingleImage(string path)
+        public ExecutionResult<ImagePrediction> ClassifySingleImage(string path)
         {
             // TODO: This method needs refactoring. We should accept the prediction engine from outside.
             if (string.IsNullOrEmpty(path) || !File.Exists(path))
-                throw new ArgumentException(CommonConstants.Constants.Message.MissingOrInvalidFile);
+                throw new ArgumentException(path);
 
             var imageData = new ImageData()
             {
@@ -39,7 +40,7 @@
 
             var predictor = this._mlContext.Model.CreatePredictionEngine<ImageData, ImagePrediction>(model);
 
-            return predictor.Predict(imageData);
+            return ExecutionResult<ImagePrediction>.SuccessWith(predictor.Predict(imageData));
         }
 
         private ITransformer GenerateModel()

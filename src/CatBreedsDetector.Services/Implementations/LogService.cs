@@ -1,4 +1,7 @@
-﻿namespace CatBreedsDetector.Services.Implementations
+﻿using CatBreedsDetector.Common;
+using CatBreedsDetector.Common.Execution;
+
+namespace CatBreedsDetector.Services.Implementations
 {
     using System;
     using CatBreedsDetector.Services.Contracts;
@@ -23,8 +26,7 @@
         /// <inheritdoc />
         public void SaveToLog(Exception exception)
         {
-            if (exception == null)
-                return;
+            ArgumentNullException.ThrowIfNull(exception);
 
             this._logger.Error(exception);
         }

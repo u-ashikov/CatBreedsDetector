@@ -4,14 +4,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using CatBreedsDetector.Services.Contracts;
+using CatBreedsDetector.Common.Execution;
 
 public class FileServiceMock : IFileService
 {
     /// <inheritdoc />
-    public void DeleteFilesInDirectory(string directoryPath)
-    {
-    }
+    public ExecutionResult DeleteFilesInDirectory(string directoryPath) => ExecutionResult.Success();
 
     /// <inheritdoc />
-    public Task SaveImageToFileAsync(string imagePath, IFormFile imageFile, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task<ExecutionResult> SaveImageToFileAsync(string imagePath, IFormFile imageFile, CancellationToken cancellationToken)
+        => Task.FromResult(ExecutionResult.Success());
 }

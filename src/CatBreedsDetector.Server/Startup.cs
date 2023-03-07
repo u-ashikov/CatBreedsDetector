@@ -60,9 +60,9 @@ namespace CatBreedsDetector.Web
                     .AllowAnyMethod();
             });
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(configure =>
             {
-                endpoints.MapControllers();
+                configure.MapDefaultControllerRoute();
             });
         }
     }

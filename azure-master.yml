@@ -4,62 +4,70 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
 trigger:
-- master
+  - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: "windows-latest"
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  solution: "**/*.sln"
+  buildPlatform: "Any CPU"
+  buildConfiguration: "Release"
 
 steps:
-- task: NuGetToolInstaller@1
-  displayName: 'Nuget tool installer'
+  - task: NuGetToolInstaller@1
+    displayName: "Nuget tool installer"
 
-- task: VisualStudioTestPlatformInstaller@1
-  displayName: 'Install VS Test Platform'
-  inputs:
-    packageFeedSelector: 'nugetOrg'
-    versionSelector: 'latestStable'
+  - task: VisualStudioTestPlatformInstaller@1
+    displayName: "Install VS Test Platform"
+    inputs:
+      packageFeedSelector: "nugetOrg"
+      versionSelector: "latestStable"
 
-- task: NuGetCommand@2
-  displayName: 'Restore solution'
-  inputs:
-    restoreSolution: '$(solution)'
+  - task: NuGetCommand@2
+    displayName: "Restore solution"
+    inputs:
+      restoreSolution: "$(solution)"
 
-- task: VSBuild@1
-  displayName: 'Build solution'
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+  - task: VSBuild@1
+    displayName: "Build solution"
+    inputs:
+      solution: "$(solution)"
+      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+      platform: "$(buildPlatform)"
+      configuration: "$(buildConfiguration)"
 
-- task: VSTest@2
-  displayName: 'Classification Integration Tests'
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\CatBreedsDetector.Classification.Integration.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)\test'
+  - task: VSTest@2
+    displayName: "Unit Tests"
+    inputs:
+      testSelector: "testAssemblies"
+      testAssemblyVer2: |
+        **\CatBreedsDetector.UnitTests.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)\test'
 
-- task: VSTest@2
-  displayName: 'Service Integration Tests'
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\CatBreedsDetector.Services.Integration.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)\test'
-- task: VSTest@2
-  displayName: 'Server Integration Tests'
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\CatBreedsDetector.Server.Integration.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)\test'
+  - task: VSTest@2
+    displayName: "Classification Integration Tests"
+    inputs:
+      testSelector: "testAssemblies"
+      testAssemblyVer2: |
+        **\CatBreedsDetector.Classification.Integration.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)\test'
 
+  - task: VSTest@2
+    displayName: "Service Integration Tests"
+    inputs:
+      testSelector: "testAssemblies"
+      testAssemblyVer2: |
+        **\CatBreedsDetector.Services.Integration.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)\test'
+  - task: VSTest@2
+    displayName: "Server Integration Tests"
+    inputs:
+      testSelector: "testAssemblies"
+      testAssemblyVer2: |
+        **\CatBreedsDetector.Server.Integration.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)\test'

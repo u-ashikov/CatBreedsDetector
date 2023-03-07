@@ -2,15 +2,21 @@
 {
     using CatBreedsDetector.Classification.Interfaces;
     using CatBreedsDetector.Classification.Models;
+    using CatBreedsDetector.Common.Execution;
     using CatBreedsDetector.Tests.Common.Helpers;
-    
+
     public class CatBreedClassifierMock : ICatBreedClassifier
     {
         /// <inheritdoc />
-        public ImagePrediction ClassifySingleImage(string path) => new()
+        public ExecutionResult<ImagePrediction> ClassifySingleImage(string path)
         {
-            PredictedLabelValue = TestsHelper.GenerateRandomString(),
-            Score = new [] { (float)TestsHelper.GenerateRandomProbability()}
-        };
+            var imagePrediction = new ImagePrediction()
+            {
+                PredictedLabelValue = TestsHelper.GenerateRandomString(),
+                Score = new[] {(float) TestsHelper.GenerateRandomProbability()}
+            };
+
+            return ExecutionResult<ImagePrediction>.SuccessWith(imagePrediction);
+        }
     }
 }
