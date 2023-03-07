@@ -1,5 +1,6 @@
 ﻿namespace CatBreedsDetector.Tests.Common.Helpers
 {
+    using System.Collections.Generic;
     using System.IO;
     using System;
     using System.Linq;
@@ -121,6 +122,20 @@
                 return new string(' ', 1);
 
             return new string(' ', charactersCount);
+        }
+
+        public static IEnumerable<T> GetRandomCountOf<T>(Func<T> initializer, int minCountOfElements = 1, int maxCountOfElements = 10)
+        {
+            Assert.NotNull(initializer);
+            var result = new List<T>(capacity: maxCountOfElements);
+
+            for (var i = minCountOfElements; i <= maxCountOfElements; i++)
+            {
+                var element = initializer();
+                result.Add(element);
+            }
+
+            return result;
         }
     }
 }
