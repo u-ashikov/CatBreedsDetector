@@ -1,16 +1,12 @@
 namespace CatBreedsDetector.Web
 {
-    using CatBreedsDetector.Classification;
-    using CatBreedsDetector.Classification.Interfaces;
-    using CatBreedsDetector.Services.Contracts;
-    using CatBreedsDetector.Services.Implementations;
+    using CatBreedsDetector.Web.Extensions;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using NLog;
 
     public class Startup
     {
@@ -37,7 +33,9 @@ namespace CatBreedsDetector.Web
                 });
 
             services
-                .ConfigureCoreServices();
+                .ConfigureCoreServices()
+                .ConfigureLogging()
+                .ConfigureSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +44,12 @@ namespace CatBreedsDetector.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                    options.RoutePrefix = string.Empty;
+                });
             }
 
             app.UseRouting();
