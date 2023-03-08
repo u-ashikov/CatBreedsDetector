@@ -34,12 +34,10 @@ namespace CatBreedsDetector.Web
                             var errors = actionContext.ModelState.Values;
                             return new BadRequestObjectResult(errors);
                         };
-                    });
+                });
 
-            services.AddSingleton<ICatBreedClassifier, CatBreedClassifier>();
-            services.AddSingleton<IFileService, FileService>();
-            services.AddSingleton<ILogService, LogService>();
-            services.AddSingleton<ILogger>(_ => LogManager.GetLogger("FileLogger"));
+            services
+                .ConfigureCoreServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
