@@ -57,7 +57,7 @@ namespace CatBreedsDetector.Web.Extensions
 
             serviceCollection.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("Cat Breeds Detector v1", new OpenApiInfo()
+                options.SwaggerDoc("CBD v1", new OpenApiInfo()
                 {
                     Version = "v1",
                     Title = "Cat Breeds Detector API",
