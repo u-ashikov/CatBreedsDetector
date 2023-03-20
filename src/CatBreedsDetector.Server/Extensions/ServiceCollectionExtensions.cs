@@ -7,7 +7,9 @@ namespace CatBreedsDetector.Web.Extensions
     using CatBreedsDetector.Classification.Interfaces;
     using CatBreedsDetector.Services.Contracts;
     using CatBreedsDetector.Services.Implementations;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.OpenApi.Models;
     using NLog;
 
@@ -54,6 +56,11 @@ namespace CatBreedsDetector.Web.Extensions
         public static IServiceCollection ConfigureSwagger(this IServiceCollection serviceCollection)
         {
             ArgumentNullException.ThrowIfNull(serviceCollection);
+
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+            var env = serviceProvider.GetService<IWebHostEnvironment>();
+
+            if (!env.IsDevelopment()) return serviceCollection;
 
             serviceCollection.AddSwaggerGen(options =>
             {
