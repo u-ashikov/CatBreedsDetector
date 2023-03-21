@@ -29,6 +29,13 @@ steps:
     inputs:
       restoreSolution: "$(solution)"
 
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'SonarCloud'
+      organization: 'ya-software'
+      scannerMode: 'MSBuild'
+      projectKey: 'ad60d309456ccdc17f1e5ef1d55fc9cdee6f7099'
+
   - task: VSBuild@1
     displayName: "Build solution"
     inputs:
@@ -36,6 +43,8 @@ steps:
       msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
       platform: "$(buildPlatform)"
       configuration: "$(buildConfiguration)"
+
+  - task: SonarCloudAnalyze@1
 
   - task: VSTest@2
     displayName: "Unit Tests"
