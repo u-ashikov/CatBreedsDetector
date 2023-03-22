@@ -15,6 +15,9 @@ variables:
   buildConfiguration: "Release"
 
 steps:
+  - checkout: self
+    fetchDepth: 0
+
   - task: NuGetToolInstaller@1
     displayName: "Nuget tool installer"
 
@@ -30,11 +33,13 @@ steps:
       restoreSolution: "$(solution)"
 
   - task: SonarCloudPrepare@1
+    displayName: 'Prepare Sonar Cloud analysis configuration'
     inputs:
-      SonarCloud: 'SonarCloud'
-      organization: 'ya-software'
+      SonarCloud: 'Sonar cloud'
+      organization: 'ya-software-azure'
       scannerMode: 'MSBuild'
-      projectKey: 'ad60d309456ccdc17f1e5ef1d55fc9cdee6f7099'
+      projectKey: 'YASoftware_Cat-breeds-detector'
+      projectName: 'Cat breeds detector'
 
   - task: VSBuild@1
     displayName: "Build solution"
@@ -43,8 +48,13 @@ steps:
       msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
       platform: "$(buildPlatform)"
       configuration: "$(buildConfiguration)"
-
+  
   - task: SonarCloudAnalyze@1
+    displayName: 'Run Sonar Cloud analysis'
+    
+  - task: SonarCloudPublish@1
+    inputs:
+      pollingTimeoutSec: '300'
 
   - task: VSTest@2
     displayName: "Unit Tests"
