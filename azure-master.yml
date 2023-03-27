@@ -23,6 +23,12 @@ steps:
     inputs:
       packageType: 'sdk'
       version: '7.x'
+  
+  - task: DotNetCoreCLI@2
+    displayName: "Restore solution"
+    inputs:
+      command: 'restore'
+      projects: '**/*.csproj'
 
   - task: NuGetToolInstaller@1
     displayName: "Nuget tool installer"
@@ -32,11 +38,6 @@ steps:
     inputs:
       packageFeedSelector: "nugetOrg"
       versionSelector: "latestStable"
-
-  - task: NuGetCommand@2
-    displayName: "Restore solution"
-    inputs:
-      restoreSolution: "$(solution)"
 
   - task: SonarCloudPrepare@1
     displayName: 'Prepare Sonar Cloud analysis configuration'
