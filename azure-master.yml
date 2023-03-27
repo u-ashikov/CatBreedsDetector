@@ -22,7 +22,7 @@ steps:
     displayName: 'Use .NET 7'
     inputs:
       packageType: 'sdk'
-      version: '7.0.200'
+      version: '7.x'
 
   - task: NuGetToolInstaller@1
     displayName: "Nuget tool installer"
