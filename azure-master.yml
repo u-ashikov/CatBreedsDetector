@@ -32,11 +32,6 @@ steps:
     inputs:
       packageFeedSelector: "nugetOrg"
       versionSelector: "latestStable"
-    
-  - task: MSBuild@1
-    inputs:
-      solution: '**/*.sln'
-      msbuildVersion: 'latest'
 
   - task: NuGetCommand@2
     displayName: "Restore solution"
