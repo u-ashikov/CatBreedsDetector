@@ -19,12 +19,12 @@ steps:
     fetchDepth: 0
 
   - task: PowerShell@2
+    displayName: "Clear agent's folder content"
     inputs:
       targetType: 'inline'
       script: |
-        # Write your PowerShell commands here.
-      
-        Write-Host $(System.DefaultWorkingDirectory)
+        Remove-Item  $(System.DefaultWorkingDirectory)\* -Recurse
+        Write-Host The contents of the folder: $(System.DefaultWorkingDirectory) cleared.
 
   - task: UseDotNet@2
     displayName: 'Use .NET 7'
