@@ -18,14 +18,6 @@ steps:
   - checkout: self
     fetchDepth: 0
 
-  - task: PowerShell@2
-    displayName: "Clear agent's folder content"
-    inputs:
-      targetType: 'inline'
-      script: |
-        Remove-Item "$(System.DefaultWorkingDirectory)\*" -Recurse
-        Write-Host The contents of the folder: $(System.DefaultWorkingDirectory) cleared.
-
   - task: UseDotNet@2
     displayName: 'Use .NET 7'
     inputs:
@@ -110,3 +102,11 @@ steps:
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)\test'
       codeCoverageEnabled: true
+      
+  - task: PowerShell@2
+    displayName: "Clear agent's folder content"
+    inputs:
+      targetType: 'inline'
+      script: |
+        Remove-Item "$(System.DefaultWorkingDirectory)\*" -Recurse
+        Write-Host The contents of the folder: $(System.DefaultWorkingDirectory) cleared.
