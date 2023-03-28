@@ -17,7 +17,15 @@ variables:
 steps:
   - checkout: self
     fetchDepth: 0
-    
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        # Write your PowerShell commands here.
+      
+        Write-Host $(System.DefaultWorkingDirectory)
+
   - task: UseDotNet@2
     displayName: 'Use .NET 7'
     inputs:
@@ -72,6 +80,7 @@ steps:
         **\CatBreedsDetector.UnitTests.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)\test'
+      codeCoverageEnabled: true
 
   - task: VSTest@2
     displayName: "Classification Integration Tests"
@@ -81,6 +90,7 @@ steps:
         **\CatBreedsDetector.Classification.Integration.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)\test'
+      codeCoverageEnabled: true
 
   - task: VSTest@2
     displayName: "Service Integration Tests"
@@ -90,6 +100,7 @@ steps:
         **\CatBreedsDetector.Services.Integration.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)\test'
+      codeCoverageEnabled: true
   - task: VSTest@2
     displayName: "Server Integration Tests"
     inputs:
@@ -98,3 +109,4 @@ steps:
         **\CatBreedsDetector.Server.Integration.dll
         !**\obj\**
       searchFolder: '$(System.DefaultWorkingDirectory)\test'
+      codeCoverageEnabled: true
