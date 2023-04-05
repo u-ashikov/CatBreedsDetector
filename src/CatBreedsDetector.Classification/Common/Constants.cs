@@ -6,7 +6,7 @@
     /// <summary>
     /// A class containing common constants for the application.
     /// </summary>
-    public class Constants
+    public static class Constants
     {
         /// <summary>
         /// Gets the name of the saved trained model as a zip archive.
@@ -16,21 +16,25 @@
         /// <summary>
         /// Gets the images folder path.
         /// </summary>
-        public static readonly string ImagesFolder = Path.Combine(AssetsPath, "images");
+        public static readonly string ImagesFolder;
 
         /// <summary>
         /// Gets the training tags path.
         /// </summary>
-        public static readonly string TrainTagsTsv = Path.Combine(ImagesFolder, "tags.tsv");
+        public static readonly string TrainTagsTsv;
 
         /// <summary>
         /// Gets the tensor flow model path.
         /// </summary>
-        public static readonly string InceptionTensorFlowModel = Path.Combine(AssetsPath, "inception", "tensorflow_inception_graph.pb");
+        public static readonly string InceptionTensorFlowModel;
 
-        /// <summary>
-        /// Gets the value of the assets path.
-        /// </summary>
-        private static readonly string AssetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets");
+        static Constants()
+        {
+            var assetsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "assets");
+
+            ImagesFolder = Path.Combine(assetsPath, "images");
+            TrainTagsTsv = Path.Combine(ImagesFolder, "tags.tsv");
+            InceptionTensorFlowModel = Path.Combine(assetsPath, "inception", "tensorflow_inception_graph.pb");
+        }
     }
 }
