@@ -1,4 +1,4 @@
-namespace CatBreedsDetector.Web
+namespace CatBreedsDetector.Server
 {
     using CatBreedsDetector.Web.Extensions;
     using Microsoft.AspNetCore.Builder;
