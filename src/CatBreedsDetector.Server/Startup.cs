@@ -1,6 +1,6 @@
 namespace CatBreedsDetector.Server
 {
-    using CatBreedsDetector.Web.Extensions;
+    using CatBreedsDetector.Server.Extensions;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -52,6 +52,7 @@ namespace CatBreedsDetector.Server
                 });
             }
 
+            app.ConfigureExceptionHandler();
             app.UseRouting();
 
             app.UseCors(builder =>
