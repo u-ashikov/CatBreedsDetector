@@ -1,4 +1,4 @@
-namespace CatBreedsDetector.Web.Extensions
+namespace CatBreedsDetector.Server.Extensions
 {
     using System;
     using System.IO;
