@@ -1,15 +1,14 @@
-﻿namespace CatBreedsDetector.Services.Integration
+﻿namespace CatBreedsDetector.Services.Integration;
+
+using CatBreedsDetector.Services.Contracts;
+using CatBreedsDetector.Services.Implementations;
+
+public abstract class BaseTest
 {
-    using CatBreedsDetector.Services.Contracts;
-    using CatBreedsDetector.Services.Implementations;
+    protected readonly IFileService FileService;
 
-    public abstract class BaseTest
+    protected BaseTest()
     {
-        protected readonly IFileService FileService;
-
-        protected BaseTest()
-        {
-            this.FileService = new FileService();
-        }
+        this.FileService = new FileService();
     }
 }
