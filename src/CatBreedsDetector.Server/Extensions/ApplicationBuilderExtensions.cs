@@ -18,9 +18,9 @@ public static class ApplicationBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(applicationBuilder);
 
-        applicationBuilder.UseExceptionHandler(appError =>
+        applicationBuilder.UseExceptionHandler(applicationBuilder =>
         {
-            appError.Run(async context =>
+            applicationBuilder.Run(async context =>
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.Response.ContentType = "application/json";

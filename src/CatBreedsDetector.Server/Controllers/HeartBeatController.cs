@@ -11,6 +11,6 @@ public class HeartBeatController : ControllerBase
     /// Use this endpoint to check if the API server is up and running.
     /// </summary>
     /// <returns>An <see cref="IActionResult"/> containing information whether the API server is up and running.</returns>
-    [HttpGet("[action]")]
+    [HttpGet]
     public IActionResult Get() => this.Ok(ServerConstants.Messages.ServerIsRunning);
 }
