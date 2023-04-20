@@ -2,8 +2,8 @@
 
 using System;
 using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 
 /// <summary>
 /// A static class containing extension methods over the <see cref="IApplicationBuilder"/> interface.
@@ -18,19 +18,17 @@ public static class ApplicationBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(applicationBuilder);
 
-        applicationBuilder.UseExceptionHandler(applicationBuilder =>
-        {
-            applicationBuilder.Run(async context =>
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                context.Response.ContentType = "application/json";
+        applicationBuilder.UseExceptionHandler(CustomExceptionHandler);
+    }
 
-                var exceptionHandlerFeature = context.Features.Get<IExceptionHandlerFeature>();
-                if (exceptionHandlerFeature != null)
-                {
-                    // TODO: Log the error.
-                }
-            });
+    private static void CustomExceptionHandler(IApplicationBuilder applicationBuilder)
+    {
+        applicationBuilder.Run(httpContext =>
+        {
+            httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            httpContext.Response.ContentType = "application/json";
+
+            return Task.CompletedTask;
         });
     }
 }
