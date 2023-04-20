@@ -51,8 +51,12 @@ public class Startup
                 options.RoutePrefix = string.Empty;
             });
         }
+        else
+        {
+            app.UseHsts();
+            app.ConfigureExceptionHandler();
+        }
 
-        app.ConfigureExceptionHandler();
         app.UseRouting();
 
         app.UseCors(builder =>
