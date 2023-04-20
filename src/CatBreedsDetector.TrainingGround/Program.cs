@@ -1,32 +1,31 @@
-﻿namespace CatBreedsDetector.TrainingGround
+﻿namespace CatBreedsDetector.TrainingGround;
+
+using System.IO;
+
+public class Program
 {
-    using System.IO;
-
-    public class Program
+    public static void Main()
     {
-        public static void Main()
+        const string catsImagesDirectoryName = "cats";
+        const string trainingTagsFile = "tags.tsv";
+        const string trainingTagsSeparatorChar = "\t";
+
+        if (!Directory.Exists(catsImagesDirectoryName))
+            return;
+
+        var directories = Directory.GetDirectories(catsImagesDirectoryName);
+
+        using var fileWriter = new StreamWriter(trainingTagsFile, true);
+        foreach (var directory in directories)
         {
-            const string catsImagesDirectoryName = "cats";
-            const string trainingTagsFile = "tags.tsv";
-            const string trainingTagsSeparatorChar = "\t";
+            var directoryInfo = new DirectoryInfo(directory);
+            var files = Directory.GetFiles(directory);
 
-            if (!Directory.Exists(catsImagesDirectoryName))
-                return;
-
-            var directories = Directory.GetDirectories(catsImagesDirectoryName);
-
-            using var fileWriter = new StreamWriter(trainingTagsFile, true);
-            foreach (var directory in directories)
+            foreach (var file in files)
             {
-                var directoryInfo = new DirectoryInfo(directory);
-                var files = Directory.GetFiles(directory);
+                var fileInfo = new FileInfo(file);
 
-                foreach (var file in files)
-                {
-                    var fileInfo = new FileInfo(file);
-
-                    fileWriter.WriteLine(string.Concat(fileInfo.Name, trainingTagsSeparatorChar, directoryInfo.Name));
-                }
+                fileWriter.WriteLine(string.Concat(fileInfo.Name, trainingTagsSeparatorChar, directoryInfo.Name));
             }
         }
     }

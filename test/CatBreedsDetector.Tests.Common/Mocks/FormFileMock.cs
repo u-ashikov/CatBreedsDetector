@@ -1,10 +1,9 @@
-﻿namespace CatBreedsDetector.Tests.Common.Mocks
-{
-    using Microsoft.AspNetCore.Http;
-    using Moq;
+﻿namespace CatBreedsDetector.Tests.Common.Mocks;
+
+using Microsoft.AspNetCore.Http;
+using Moq;
     
-    public class FormFileMock
-    {
-        public static Mock<IFormFile> New => new();
-    }
+public class FormFileMock
+{
+    public static Mock<IFormFile> New => new();
 }

@@ -1,7 +1,6 @@
 <Project>
  <PropertyGroup>
-    <!-- use C# 9 -->
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>11.0</LangVersion>
  </PropertyGroup>
  
   <!-- StyleCop Analyzers configuration -->
