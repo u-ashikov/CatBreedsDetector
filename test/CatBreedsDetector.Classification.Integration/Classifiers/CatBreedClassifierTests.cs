@@ -18,11 +18,11 @@ public class CatBreedClassifierTests
         Assert.Throws<ArgumentException>(() => catBreedClassifier.ClassifySingleImage(path));
     }
 
-    public static IEnumerable<object[]> GetInvalidImageClassificationParameters()
+    public static IEnumerable<object?[]> GetInvalidImageClassificationParameters()
     {
-        yield return new object[] { null };
+        yield return new object?[] { null };
         yield return new object[] { string.Empty };
-        yield return new object[] {TestsHelper.GenerateWhiteSpaces()};
-        yield return new object[] {TestsHelper.GenerateRandomString()};
+        yield return new object?[] {TestsHelper.GenerateWhiteSpaces()};
+        yield return new object?[] {TestsHelper.GenerateRandomString()};
     }
 }

@@ -60,7 +60,8 @@ public static class ServiceCollectionExtensions
         var serviceProvider = serviceCollection.BuildServiceProvider();
         var env = serviceProvider.GetService<IWebHostEnvironment>();
 
-        if (!env.IsDevelopment()) return serviceCollection;
+        if (!env.IsDevelopment())
+            return serviceCollection;
 
         serviceCollection.AddSwaggerGen(options =>
         {

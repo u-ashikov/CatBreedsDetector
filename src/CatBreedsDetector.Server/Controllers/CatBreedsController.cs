@@ -13,7 +13,6 @@ using CatBreedsDetector.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-
 [ApiController]
 [Route("api/[controller]")]
 public class CatBreedsController : ControllerBase

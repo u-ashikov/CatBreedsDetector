@@ -108,7 +108,7 @@ public class ExecutionResult<T> : ExecutionResult
     /// </summary>
     /// <param name="errors">A collection of error messages that should be appended to the <see cref="ExecutionResult{T}"/>.</param>
     /// <returns>An instance of the <see cref="ExecutionResult{T}"/>.</returns>
-    public new static ExecutionResult<T> Fail(string[] errors)
+    public static new ExecutionResult<T> Fail(string[] errors)
     {
         if (errors.IsNullOrEmpty())
             throw new InvalidOperationException(Constants.Message.ErrorsCollectionIsNotValid);
@@ -124,7 +124,7 @@ public class ExecutionResult<T> : ExecutionResult
     /// </summary>
     /// <param name="error">The error message that should be appended to the <see cref="ExecutionResult{T}"/>.</param>
     /// <returns>An instance of the <see cref="ExecutionResult"/>.</returns>
-    public new static ExecutionResult<T> Fail(string error) => Fail(error.AsArray());
+    public static new ExecutionResult<T> Fail(string error) => Fail(error.AsArray());
 
     /// <summary>
     /// Use this method to generate an instance of the <see cref="ExecutionResult{T}"/> with outcome data within it.
